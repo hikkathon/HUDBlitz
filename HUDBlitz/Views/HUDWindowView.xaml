@@ -32,9 +32,6 @@
 
         <!-- Контейнер для плашки хп/нанесенного/заблокированного урона -->
         <Grid x:Name="GridDamagePanel" Grid.Row="1">
-            <!--<Image x:Name="imgAssistant" Grid.Column="1" Grid.Row="1"  Source="/Assets/Images/UI WOTB Assistant.png" Width="140" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 10 0 0" Opacity=".9"/>
-            <Label x:Name="DamageLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 9 0 0" Opacity=".9"/>
-            <Label x:Name="BlockedLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 33 0 0" Opacity=".9"/>-->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -45,17 +42,17 @@
 
                     <Grid x:Name="GridDamage">
                         <Image x:Name="ImgDamage" Grid.Column="1"  Source="/Assets/Images/Damage Dealt.png" Width="110" Height="20" HorizontalAlignment="Left" Opacity=".9"/>
-                        <TextBlock x:Name="DealtText" Text="0" Style="{StaticResource CustomFont}" Foreground="White" FontSize="16" FontWeight="Bold" Margin="25 0 0 0" Opacity=".9"/>
+                        <TextBlock x:Name="DealtText" Text="2 500" Style="{StaticResource CustomFont}" Foreground="White" FontSize="14" FontWeight="Bold" Margin="27 1 0 0" Opacity=".9"/>
                     </Grid>
 
                     <Grid x:Name="GridBlocked">
                         <Image x:Name="ImgBlocked" Grid.Column="1"  Source="/Assets/Images/Damage Received.png" Width="110" Height="20" HorizontalAlignment="Left" Opacity=".9"/>
-                        <TextBlock x:Name="ReceivedText" Text="0" Style="{StaticResource CustomFont}" Foreground="White" FontSize="16" FontWeight="Bold" Margin="25 0 0 0" Opacity=".9"/>
+                        <TextBlock x:Name="ReceivedText" Text="1 995" Style="{StaticResource CustomFont}" Foreground="White" FontSize="14" FontWeight="Bold" Margin="27 1 0 0" Opacity=".9"/>
                     </Grid>
 
                     <Grid x:Name="GridHealth">
                         <Image x:Name="ImgHealth" Grid.Column="1" Source="/Assets/Images/Strength Points.png" Width="110" Height="20" HorizontalAlignment="Left" Opacity=".9"/>
-                        <TextBlock x:Name="StrengthText" Text="0" Style="{StaticResource CustomFont}" Foreground="White" FontSize="16" FontWeight="Bold" Margin="25 0 0 0" Opacity=".9"/>
+                        <TextBlock x:Name="StrengthText" Text="1 945" Style="{StaticResource CustomFont}" Foreground="White" FontSize="14" FontWeight="Bold" Margin="27 1 0 0" Opacity=".9"/>
                     </Grid>
 
                 </StackPanel>

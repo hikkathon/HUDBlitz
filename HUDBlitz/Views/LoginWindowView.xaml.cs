@@ -29,28 +29,28 @@ namespace HUDBlitz.Views
             InitializeComponent();
         }
 
-        private void btnEnterToken_Click(object sender, RoutedEventArgs e)
+        private async void btnEnterToken_Click(object sender, RoutedEventArgs e)
         {
-            Auth(UserKey.Password);
-
-            if (GlobalVariables.Noilty != null)
+            if (GlobalVariables.response_Noilty != null && !GlobalVariables.response_Noilty.status.Contains("error"))
             {
-                if (GlobalVariables.Noilty.status == "success")
-                {
-                    TokenPanelHidden();
-                }
+                TokenPanelHidden();
+            }
+            else
+            {
+                await AuthToken(UserKey.Password);
             }
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            #region Show HUD
-
-            HUDWindowView hudView = new HUDWindowView();
-            hudView.Owner = this;
-            hudView.Show();
-
-            #endregion
+            if (GlobalVariables.response_Noilty != null && !GlobalVariables.isHashValid.Contains("error"))
+            {
+                PasswordPanelHidden();
+            }
+            else
+            {
+                await AuthPassword(UserPassword.Password, GlobalVariables.response_Noilty.data.account.password);
+            }
         }
 
         public void TokenPanelHidden()
@@ -59,12 +59,25 @@ namespace HUDBlitz.Views
             AuthPanel.Visibility = Visibility.Visible;
         }
 
+        public void PasswordPanelHidden()
+        {
+            HUDWindowView hudView = new HUDWindowView();
+            hudView.Owner = this;
+            hudView.Show();
+
+            AuthPanel.Visibility = Visibility.Hidden;
+            UserProfilePanel.Visibility = Visibility.Visible;
+
+            btnLogin.IsEnabled = false;
+            LabelNotify.Visibility = Visibility.Hidden;
+        }
+
         // Метод возвращает информацию об игроке.
-        private async Task GetAccountInfo(string application_id, string account_id, string access_token, string language)
+        private async Task GetAccountInfo(string application_id, string account_id, string access_token, string region)
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri($"https://api.wotblitz.{language}/");
+                client.BaseAddress = new Uri($"https://api.wotblitz.{region}/");
 
                 var content = new FormUrlEncodedContent(new[]
                 {
@@ -82,15 +95,15 @@ namespace HUDBlitz.Views
                 int i = original.IndexOf(substring);
                 string resultJson = original.Remove(i, substring.Length).Insert(i, "account");
 
-                GlobalVariables.player = JsonConvert.DeserializeObject<Response>(resultJson);
-                GlobalVariables.playerStatic = File.Exists($"{account_id}.json") ?
+                GlobalVariables.response_WG = JsonConvert.DeserializeObject<Response>(resultJson);
+                GlobalVariables.response_WG_Static = File.Exists($"{account_id}.json") ?
                     JsonConvert.DeserializeObject<Response>(File.ReadAllText($"{account_id}.json")) :
                     JsonConvert.DeserializeObject<Response>(resultJson);
             }
         }
 
         // Метод возвращает информацию об игроке.
-        private async Task Auth(string auth_token)
+        private async Task AuthToken(string auth_token)
         {
             using (var client = new HttpClient())
             {
@@ -104,9 +117,55 @@ namespace HUDBlitz.Views
                 var response = await client.PostAsync("/api/get-data/from/db-user", content);
                 string json = await response.Content.ReadAsStringAsync();
 
-                GlobalVariables.Noilty = JsonConvert.DeserializeObject<Models.Noilty.Response>(json);
+                GlobalVariables.response_Noilty = JsonConvert.DeserializeObject<Models.Noilty.Response>(json);
+            }
 
-                DebugLabel.Content = json;
+            // Если токен валидный пропускаем пользователя дальше
+            if (GlobalVariables.response_Noilty.status.Contains("success"))
+            {
+                UserKey.IsEnabled = false;
+                btnEnterToken.Content = $"Далее";
+                LabelNotify.Content = GlobalVariables.response_Noilty.status;
+            }
+            else
+            {
+                LabelNotify.Content = GlobalVariables.response_Noilty.status;
+            }
+        }
+
+        private async Task AuthPassword(string password, string passwordHash)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri($"http://blitzbury.noilty.loc");
+
+                var content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("password", password),
+                    new KeyValuePair<string, string>("password_hash", passwordHash)
+                });
+
+                var response = await client.PostAsync("/api/check/hash/password", content);
+                GlobalVariables.isHashValid = await response.Content.ReadAsStringAsync();
+            }
+
+            if (GlobalVariables.isHashValid.Contains("success"))
+            {
+                LabelNotify.Content = "success";
+                UserPassword.IsEnabled = false;
+                btnLogin.Content = "Запустить HUD";
+
+                await GetAccountInfo(
+                    "d2bfb95adbc6f34fb32c4924b4c93fa4",
+                    GlobalVariables.response_Noilty.data.user.wg_account_id.ToString(),
+                    GlobalVariables.response_Noilty.data.user.wg_access_token,
+                    GlobalVariables.response_Noilty.data.user.wg_region);
+
+                LabelNick.Content = GlobalVariables.response_WG.data.account.nickname;
+            }
+            else
+            {
+                LabelNotify.Content = "error";
             }
         }
     }

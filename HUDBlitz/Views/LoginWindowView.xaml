@@ -6,22 +6,36 @@
         xmlns:local="clr-namespace:HUDBlitz.Views"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="LoginWindowView" Height="250" Width="400">
+        Title="HUD for Blitz - Вход" Height="250" Width="400">
 
     <Grid>
-        <Label x:Name="DebugLabel"/>
+        <Label FontSize="10" Content="Тестовая версия не отражает все возможности приложения."/>
+
         <!-- Ввод токина -->
+        <!-- Должен быть Visible -->
         <StackPanel x:Name="TokenPanel" Visibility="Visible" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Введите токен"/>
             <PasswordBox x:Name="UserKey" Margin="0 0 0 0"/>
-            <Button x:Name="btnEnterToken" Click="btnEnterToken_Click" Margin="0 5 0 5" Content="Далее"/>
+            <Button x:Name="btnEnterToken" Click="btnEnterToken_Click" Margin="0 5 0 5" Content="Отправить"/>
         </StackPanel>
 
         <!-- Ввод логина и пароля -->
+        <!-- Должен быть Hidden -->
         <StackPanel x:Name="AuthPanel" Visibility="Hidden" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Пароль"/>
-            <PasswordBox x:Name="PassworBoxdUser" Margin="0 0 0 0"/>
-            <Button  x:Name="btnLogin" Content="Включить HUD" Margin="0 5 0 5" Click="btnLogin_Click"/>
+            <PasswordBox x:Name="UserPassword" Margin="0 0 0 0"/>
+            <Button  x:Name="btnLogin" Content="Войти" Margin="0 5 0 5" Click="btnLogin_Click"/>
         </StackPanel>
+
+        <!-- Профиль игрока -->
+        <!-- Должен быть Hidden -->
+        <StackPanel x:Name="UserProfilePanel" Visibility="Hidden" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="LabelNick" Content="Nickname"/>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Label FontSize="10" Content="Ver 1.0.0 Build 1"/>
+        </StackPanel>
+        <Label x:Name="LabelNotify" Margin="0 0 0 60" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

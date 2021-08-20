@@ -5,11 +5,19 @@ namespace HUDBlitz.Models
 {
     public static class GlobalVariables
     {
-        // Player
-        public static Response player;  // Информаци о игрое, обновляется
-        public static Response playerStatic; // Информаци о игрое, статическая. Записывается при первом запуске
+        /// <summary>
+        /// Player : Информаци о игроке, обновляется каждый тик таймера
+        /// </summary>
+        public static Response response_WG;
+        /// <summary>
+        /// Player : Информаци о игроке, статическая. Записывается при первом запуске HUD'а
+        /// </summary>
+        public static Response response_WG_Static;
 
-        // Noilty
-        public static Noilty.Response Noilty;
+        /// <summary>
+        /// Данные зарегестрированного ирока в топе Noilty
+        /// </summary>
+        public static Noilty.Response response_Noilty;
+        public static string isHashValid = "error";
     }
 }
