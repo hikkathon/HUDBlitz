@@ -74,6 +74,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\MemoryScanner.cs" />
     <Compile Include="Models\GlobalVariables.cs" />
     <Compile Include="Models\Noilty\Response.cs" />
     <Compile Include="Models\Player\Personal data\Account.cs" />
@@ -126,7 +127,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Styles\" />
-    <Folder Include="Commands\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>

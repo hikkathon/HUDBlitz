@@ -1,4 +1,5 @@
-﻿using HUDBlitz.Models;
+﻿using HUDBlitz.Commands;
+using HUDBlitz.Models;
 using HUDBlitz.Models.Player;
 using Newtonsoft.Json;
 using System;
@@ -43,7 +44,20 @@ namespace HUDBlitz.Views
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (GlobalVariables.response_Noilty != null && !GlobalVariables.isHashValid.Contains("error"))
+            GlobalVariables.MS = new MemoryScanner("wotblitz.exe");
+
+            try
+            {
+                GlobalVariables.MS.GetBaseAddress();
+                GlobalVariables.IsEnabledGame = true;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show($"World of Tanks Blitz не запущен, запустите игру и повторите попытку.", $"Ошибка : {exc.Message}", MessageBoxButton.OK, MessageBoxImage.Error);
+                GlobalVariables.IsEnabledGame = false;
+            }
+
+            if (GlobalVariables.response_Noilty != null && !GlobalVariables.IsHashValid.Contains("error") && GlobalVariables.IsEnabledGame)
             {
                 PasswordPanelHidden();
             }
@@ -95,8 +109,8 @@ namespace HUDBlitz.Views
                 int i = original.IndexOf(substring);
                 string resultJson = original.Remove(i, substring.Length).Insert(i, "account");
 
-                GlobalVariables.response_WG = JsonConvert.DeserializeObject<Response>(resultJson);
-                GlobalVariables.response_WG_Static = File.Exists($"{account_id}.json") ?
+                GlobalVariables.Response_WG = JsonConvert.DeserializeObject<Response>(resultJson);
+                GlobalVariables.Response_WG_Static = File.Exists($"{account_id}.json") ?
                     JsonConvert.DeserializeObject<Response>(File.ReadAllText($"{account_id}.json")) :
                     JsonConvert.DeserializeObject<Response>(resultJson);
             }
@@ -146,10 +160,10 @@ namespace HUDBlitz.Views
                 });
 
                 var response = await client.PostAsync("/api/check/hash/password", content);
-                GlobalVariables.isHashValid = await response.Content.ReadAsStringAsync();
+                GlobalVariables.IsHashValid = await response.Content.ReadAsStringAsync();
             }
 
-            if (GlobalVariables.isHashValid.Contains("success"))
+            if (GlobalVariables.IsHashValid.Contains("success"))
             {
                 LabelNotify.Content = "success";
                 UserPassword.IsEnabled = false;
@@ -161,7 +175,7 @@ namespace HUDBlitz.Views
                     GlobalVariables.response_Noilty.data.user.wg_access_token,
                     GlobalVariables.response_Noilty.data.user.wg_region);
 
-                LabelNick.Content = GlobalVariables.response_WG.data.account.nickname;
+                LabelNick.Content = GlobalVariables.Response_WG.data.account.nickname;
             }
             else
             {
