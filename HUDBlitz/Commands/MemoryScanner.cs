@@ -92,19 +92,19 @@ namespace HUDBlitz.Commands
 
         public void GetDamage(object sender, EventArgs e)
         {
-            Int32 DealtAddress = BaseAddress + 0x300DA78; 
-            Int32[] DealtOffset = { 0x9C, 0x0, 0x10, 0xBC, 0x64, 0x148, 0x2C };
+            Int32 DealtAddress = BaseAddress + 0x034084A0; 
+            Int32[] DealtOffset = { 0x3C, 0x98, 0x70, 0x34, 0x1C };
             Dealt = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(DealtAddress, DealtOffset), (uint)4), 0);
 
-            Int32 ReceivedAddress = BaseAddress + 0x300DA78;
-            Int32[] ReceivedOffset = { 0x9C, 0x0, 0x10, 0xBC, 0x64, 0x148, 0x30 };
+            Int32 ReceivedAddress = BaseAddress + 0x034084A0;
+            Int32[] ReceivedOffset = { 0x3C, 0x98, 0x70, 0x38, 0x1C };
             Received = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(ReceivedAddress, ReceivedOffset), (uint)4), 0);
 
-            Int32 StrengthAddress = BaseAddress + 0x300DA78;
+            Int32 StrengthAddress = BaseAddress + 0x034084A0;
             Int32[] StrengthOffset = { 0x9C, 0x0, 0x10, 0x30, 0x2C, 0x24, 0x17C };
             Strength = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(StrengthAddress, StrengthOffset), (uint)4), 0);
 
-            Int32 WGIDAddress = BaseAddress + 0x300DA78;
+            Int32 WGIDAddress = BaseAddress + 0x034084A0;
             Int32[] WGIDOffset = { 0x18, 0x18, 0x114, 0x28, 0x18, 0x2C, 0x30 };
             WGID = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(WGIDAddress, WGIDOffset), (uint)4), 0);
         }
