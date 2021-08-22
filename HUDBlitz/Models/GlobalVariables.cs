@@ -1,6 +1,8 @@
 ﻿using HUDBlitz.Commands;
 using HUDBlitz.Models.Player;
 using System.Net.Http;
+using System.Windows.Threading;
+using static HUDBlitz.Commands.WarGame.API;
 
 namespace HUDBlitz.Models
 {
@@ -27,5 +29,25 @@ namespace HUDBlitz.Models
         /// MemoryScanner
         /// </summary>
         public static MemoryScanner MS;
+
+        // Переменные после боевой статистики
+        public static BattleType battleType;
+        public static bool check = true;
+
+        #region "Рандомные бои"
+        public static float WinRate;
+        public static int Wins;
+        public static int Battles;
+        public static int Frags;
+        public static int Survived_battles;
+        public static int Hits;
+        public static int Shots;
+        public static int Deaths;
+        public static int Damage_dealt;
+        public static int Damage_received;
+        public static int Spotted;
+        public static int Dropped_capture_points;
+        public static int Capture_points;
+        #endregion
     }
 }

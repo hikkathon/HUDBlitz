@@ -1,6 +1,6 @@
 ﻿using HUDBlitz.Commands;
+using HUDBlitz.Commands.WarGame;
 using HUDBlitz.Models;
-using HUDBlitz.Models.Player;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace HUDBlitz.Views
 {
@@ -87,44 +88,6 @@ namespace HUDBlitz.Views
         }
 
         // Метод возвращает информацию об игроке.
-        private async Task GetAccountInfo(string application_id, string account_id, string access_token, string region)
-        {
-            bool check = true;
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri($"https://api.wotblitz.{region}/");
-
-                var content = new FormUrlEncodedContent(new[]
-                {
-                    new KeyValuePair<string, string>("application_id", application_id),
-                    new KeyValuePair<string, string>("account_id", account_id),
-                    new KeyValuePair<string, string>("access_token", access_token),
-                    new KeyValuePair<string, string>("extra", "statistics.rating")
-                });
-
-                var response = await client.PostAsync("/wotb/account/info/", content);
-                string json = await response.Content.ReadAsStringAsync();
-
-                string original = json;
-                string substring = account_id.ToString();
-                int i = original.IndexOf(substring);
-                string resultJson = original.Remove(i, substring.Length).Insert(i, "account");
-
-                GlobalVariables.Response_WG = JsonConvert.DeserializeObject<Response>(resultJson);
-
-                GlobalVariables.Response_WG_Static = File.Exists($"{account_id}.json") ?
-                    JsonConvert.DeserializeObject<Response>(File.ReadAllText($"{account_id}.json")) :
-                    JsonConvert.DeserializeObject<Response>(resultJson);
-
-                while (check)
-                {
-                    File.WriteAllText($"{account_id}.json", JsonConvert.SerializeObject(GlobalVariables.Response_WG));
-                    check = false;
-                }
-            }
-        }
-
-        // Метод возвращает информацию об игроке.
         private async Task AuthToken(string auth_token)
         {
             using (var client = new HttpClient())
@@ -177,7 +140,7 @@ namespace HUDBlitz.Views
                 UserPassword.IsEnabled = false;
                 btnLogin.Content = "Запустить HUD";
 
-                await GetAccountInfo(
+                await API.GetAccountInfo(
                     "d2bfb95adbc6f34fb32c4924b4c93fa4",
                     GlobalVariables.response_Noilty.data.user.wg_account_id.ToString(),
                     GlobalVariables.response_Noilty.data.user.wg_access_token,

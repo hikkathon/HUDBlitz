@@ -1,4 +1,5 @@
 ﻿using HUDBlitz.Commands;
+using HUDBlitz.Commands.WarGame;
 using HUDBlitz.Models;
 using System;
 using System.Collections.Generic;
@@ -38,11 +39,39 @@ namespace HUDBlitz.Views
         {
             GlobalVariables.MS.RegisterHandler(new MemoryScanner.MemoryEditorStateHandler(DamageShow));
 
+
             DispatcherTimer dt = new DispatcherTimer();
             dt.Interval = TimeSpan.FromMilliseconds(1);
             dt.Tick += GlobalVariables.MS.GetDamage;
             dt.Tick += WindowSize;
             dt.Start();
+
+            StartTimer();
+        }
+
+        public void StartTimer()
+        {
+            DispatcherTimer TimerPostCombatStatistics = new DispatcherTimer();
+            TimerPostCombatStatistics.Interval = TimeSpan.FromSeconds(1);
+            TimerPostCombatStatistics.Tick += AccountInfo;
+            TimerPostCombatStatistics.Start();
+        }
+
+        private async void AccountInfo(object sender, EventArgs e)
+        {
+            await API.GetAccountInfo("d2bfb95adbc6f34fb32c4924b4c93fa4", GlobalVariables.response_Noilty.data.user.wg_account_id.ToString(), GlobalVariables.response_Noilty.data.user.wg_access_token, GlobalVariables.response_Noilty.data.user.wg_region);  
+            TestLabel.Content = 
+                $"Mode:\t\t\t{GlobalVariables.battleType}\n" +
+                $"Nickname:\t\t{GlobalVariables.Response_WG.data.account.nickname}\n" +
+                $"Wins/Battles:\t\t{GlobalVariables.Wins} ({GlobalVariables.Battles})\t({Math.Round((float)GlobalVariables.Wins / (float)GlobalVariables.Battles * 100, 2).ToString().Replace("не число", "0")}%)\n" +
+                $"Kills:\t\t\t{GlobalVariables.Frags}\t({Math.Round((float)GlobalVariables.Frags / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
+                $"Deaths:\t\t\t{GlobalVariables.Deaths}\t({Math.Round((float)GlobalVariables.Deaths / (float)GlobalVariables.Battles * 100, 2).ToString().Replace("не число", "0")}%)\n" +
+                $"Hits/Shots:\t\t{GlobalVariables.Hits}/{GlobalVariables.Shots}\t({Math.Round((float)GlobalVariables.Hits / (float)GlobalVariables.Shots * 100, 2).ToString().Replace("не число", "0")}%)\n" +
+                $"Damage Dealt:\t\t{GlobalVariables.Damage_dealt}\t({Math.Round((float)GlobalVariables.Damage_dealt / (float)GlobalVariables.Battles, 0).ToString().Replace("не число", "0")})\n" +
+                $"Damage Received:\t{GlobalVariables.Damage_received}\t({Math.Round((float)GlobalVariables.Damage_received / (float)GlobalVariables.Battles, 0).ToString().Replace("не число", "0")})\n" +
+                $"Spotted:\t\t\t{GlobalVariables.Spotted}\t({Math.Round((float)GlobalVariables.Spotted / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
+                $"Defence:\t\t\t{GlobalVariables.Dropped_capture_points}\t({Math.Round((float)GlobalVariables.Dropped_capture_points / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
+                $"Capture:\t\t\t{GlobalVariables.Capture_points}\t({Math.Round((float)GlobalVariables.Capture_points / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n";
         }
 
         #region Damage Panel
@@ -68,11 +97,11 @@ namespace HUDBlitz.Views
             {
                 MaxDealt = 0;
                 MaxReceived = 0;
-                StackPanelDamage.Visibility = Visibility.Hidden;
+                //StackPanelDamage.Visibility = Visibility.Hidden;
             }
             else
             {
-                StackPanelDamage.Visibility = Visibility.Visible;
+                //StackPanelDamage.Visibility = Visibility.Visible;
             }
 
             CurrentDealt = Dealt;
