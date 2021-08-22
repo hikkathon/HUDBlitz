@@ -52,11 +52,37 @@ namespace HUDBlitz.Views
         int Strength { get { return GlobalVariables.MS.Strength; } }
         int WGID { get { return GlobalVariables.MS.WGID; } }
 
+        private int _currentDealt;
+        private int _currentReceived;
+        private int _maxDealt;
+        private int _maxReceived;
+
+        public int CurrentDealt{ get { return _currentDealt; } set { _currentDealt = value; } }
+        public int CurrentReceived { get { return _currentReceived; } set { _currentReceived = value; ; } }
+        public int MaxDealt{ get { return _maxDealt; } set { _maxDealt = value; } }
+        public int MaxReceived { get { return _maxReceived; } set { _maxReceived = value; ; } }
+
         public void DamageShow()
         {
-            DealtText.Text = (Dealt <= 0) ? " 0" : $"{Dealt:# ### ###}";
-            ReceivedText.Text = (Received <= 0) ? " 0" : $"{Received:# ### ###}";
-            StrengthText.Text = (Strength <= 0) ? " 0" : $"{Strength:# ### ###}";
+            if (Strength == 0)
+            {
+                MaxDealt = 0;
+                MaxReceived = 0;
+            }
+
+            CurrentDealt = Dealt;
+            CurrentReceived = Received;
+
+            if (CurrentDealt > MaxDealt)
+                MaxDealt = CurrentDealt;
+
+            if (CurrentReceived > MaxReceived)
+                MaxReceived = CurrentReceived;
+
+
+            DealtText.Text = (MaxDealt == 0) ? " 0" : $"{MaxDealt:# ### ###}";
+            ReceivedText.Text = (MaxReceived == 0) ? " 0" : $"{MaxReceived:# ### ###}";
+            StrengthText.Text = (Strength == 0) ? " 0" : $"{Strength:# ### ###}";
         }
 
         #endregion

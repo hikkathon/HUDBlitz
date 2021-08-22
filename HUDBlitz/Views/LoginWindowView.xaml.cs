@@ -89,6 +89,7 @@ namespace HUDBlitz.Views
         // Метод возвращает информацию об игроке.
         private async Task GetAccountInfo(string application_id, string account_id, string access_token, string region)
         {
+            bool check = true;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri($"https://api.wotblitz.{region}/");
@@ -110,9 +111,16 @@ namespace HUDBlitz.Views
                 string resultJson = original.Remove(i, substring.Length).Insert(i, "account");
 
                 GlobalVariables.Response_WG = JsonConvert.DeserializeObject<Response>(resultJson);
+
                 GlobalVariables.Response_WG_Static = File.Exists($"{account_id}.json") ?
                     JsonConvert.DeserializeObject<Response>(File.ReadAllText($"{account_id}.json")) :
                     JsonConvert.DeserializeObject<Response>(resultJson);
+
+                while (check)
+                {
+                    File.WriteAllText($"{account_id}.json", JsonConvert.SerializeObject(GlobalVariables.Response_WG));
+                    check = false;
+                }
             }
         }
 
@@ -175,7 +183,7 @@ namespace HUDBlitz.Views
                     GlobalVariables.response_Noilty.data.user.wg_access_token,
                     GlobalVariables.response_Noilty.data.user.wg_region);
 
-                LabelNick.Content = GlobalVariables.Response_WG.data.account.nickname;
+                LabelNick.Content = $"{GlobalVariables.Response_WG.data.account.nickname}";
             }
             else
             {
