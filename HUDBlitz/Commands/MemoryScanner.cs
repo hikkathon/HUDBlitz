@@ -100,8 +100,8 @@ namespace HUDBlitz.Commands
             Int32[] ReceivedOffset = { 0x188, 0xA4, 0x114, 0x0, 0x30, 0x148, 0x28 };
             Received = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(ReceivedAddress, ReceivedOffset), (uint)4), 0);
 
-            Int32 StrengthAddress = BaseAddress + 0x034084A0;
-            Int32[] StrengthOffset = { 0x9C, 0x0, 0x10, 0x30, 0x2C, 0x24, 0x17C };
+            Int32 StrengthAddress = BaseAddress + 0x034A1FC0;
+            Int32[] StrengthOffset = { 0x0, 0x8, 0x2C, 0x24, 0x174 };
             Strength = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(StrengthAddress, StrengthOffset), (uint)4), 0);
 
             Int32 WGIDAddress = BaseAddress + 0x034084A0;

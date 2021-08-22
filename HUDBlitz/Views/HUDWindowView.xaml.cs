@@ -64,10 +64,15 @@ namespace HUDBlitz.Views
 
         public void DamageShow()
         {
-            if (Strength == 0)
+            if (Strength == 0 )
             {
                 MaxDealt = 0;
                 MaxReceived = 0;
+                StackPanelDamage.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                StackPanelDamage.Visibility = Visibility.Visible;
             }
 
             CurrentDealt = Dealt;
