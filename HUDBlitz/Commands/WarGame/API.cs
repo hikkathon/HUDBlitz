@@ -25,7 +25,7 @@ namespace HUDBlitz.Commands.WarGame
                     new KeyValuePair<string, string>("application_id", application_id),
                     new KeyValuePair<string, string>("account_id", account_id),
                     new KeyValuePair<string, string>("access_token", access_token),
-                    new KeyValuePair<string, string>("extra", "statistics.rating")
+                    new KeyValuePair<string, string>("extra", "statistics.rating, private.grouped_contacts")
                 });
 
                 var response = await client.PostAsync("/wotb/account/info/", content);
@@ -130,19 +130,19 @@ namespace HUDBlitz.Commands.WarGame
                     string _frags8p = (GlobalVariables.Response_WG.data.account.statistics.rating.frags8p - GlobalVariables.Response_WG_Send.data.account.statistics.rating.frags8p).ToString();
                     string _hits = (GlobalVariables.Response_WG.data.account.statistics.rating.hits - GlobalVariables.Response_WG_Send.data.account.statistics.rating.hits).ToString();
                     string _losses = (GlobalVariables.Response_WG.data.account.statistics.rating.losses - GlobalVariables.Response_WG_Send.data.account.statistics.rating.losses).ToString();
-                    string _max_frags = "0";
-                    string _max_xp = "0";
+                    string _max_frags = (GlobalVariables.Response_WG.data.account.statistics.all.max_frags - GlobalVariables.Response_WG_Send.data.account.statistics.all.max_frags).ToString();
+                    string _max_xp = (GlobalVariables.Response_WG.data.account.statistics.all.max_xp - GlobalVariables.Response_WG_Send.data.account.statistics.all.max_xp).ToString();
                     string _shots = (GlobalVariables.Response_WG.data.account.statistics.rating.shots - GlobalVariables.Response_WG_Send.data.account.statistics.rating.shots).ToString();
                     string _spotted = (GlobalVariables.Response_WG.data.account.statistics.rating.spotted - GlobalVariables.Response_WG_Send.data.account.statistics.rating.spotted).ToString();
                     string _survived_battles = (GlobalVariables.Response_WG.data.account.statistics.rating.survived_battles - GlobalVariables.Response_WG_Send.data.account.statistics.rating.survived_battles).ToString();
                     string _win_and_survived = (GlobalVariables.Response_WG.data.account.statistics.rating.win_and_survived - GlobalVariables.Response_WG_Send.data.account.statistics.rating.win_and_survived).ToString();
                     string _wins = (GlobalVariables.Response_WG.data.account.statistics.rating.wins - GlobalVariables.Response_WG_Send.data.account.statistics.rating.wins).ToString();
                     string _xp = (GlobalVariables.Response_WG.data.account.statistics.rating.xp - GlobalVariables.Response_WG_Send.data.account.statistics.rating.xp).ToString();
-                    string _credits = "0";
-                    string _gold = "0";
-                    string _free_xp = "0";
-                    string _battle_life_time = "0";
-                    string _is_premium = "0"; 
+                    string _credits = (GlobalVariables.Response_WG.data.account.@private.credits - GlobalVariables.Response_WG_Send.data.account.@private.credits).ToString();
+                    string _gold = (GlobalVariables.Response_WG.data.account.@private.gold - GlobalVariables.Response_WG_Send.data.account.@private.gold).ToString();
+                    string _free_xp = (GlobalVariables.Response_WG.data.account.@private.free_xp - GlobalVariables.Response_WG_Send.data.account.@private.free_xp).ToString();
+                    string _battle_life_time = GlobalVariables.Response_WG.data.account.@private.battle_life_time.ToString();
+                    string _is_premium = GlobalVariables.Response_WG.data.account.@private.is_premium ? "1" : "0"; 
                     
                     await SendData(_user_id,_account_id,_fraction_id,_wg_region,_battle_type_id,_damage_blocked,_tank_durability,_capture_points,_damage_dealt,_damage_received,_dropped_capture_points,
                         _frags, _frags8p, _hits,_losses,_max_frags, _max_xp,_shots,_spotted,_survived_battles,_win_and_survived,_wins, _xp, _credits,_gold,_free_xp,_battle_life_time,_is_premium);
@@ -153,7 +153,41 @@ namespace HUDBlitz.Commands.WarGame
                 }
                 else if (GlobalVariables.Response_WG.data.account.statistics.all.battles > GlobalVariables.Response_WG_Send.data.account.statistics.all.battles)
                 {
+                    string _user_id = GlobalVariables.response_Noilty.data.account.user_id.ToString();
+                    string _account_id = GlobalVariables.response_Noilty.data.account.id.ToString();
+                    string _fraction_id = GlobalVariables.response_Noilty.data.account.fraction_id.ToString();
+                    string _wg_region = GlobalVariables.response_Noilty.data.user.wg_region;
+                    string _battle_type_id = ((int)GlobalVariables.battleType).ToString();
+                    string _damage_blocked = GlobalVariables.MaxReceived.ToString();
+                    string _tank_durability = GlobalVariables.Strength.ToString();
+                    string _capture_points = (GlobalVariables.Response_WG.data.account.statistics.all.battles - GlobalVariables.Response_WG_Send.data.account.statistics.all.battles).ToString();
+                    string _damage_dealt = (GlobalVariables.Response_WG.data.account.statistics.all.damage_dealt - GlobalVariables.Response_WG_Send.data.account.statistics.all.damage_dealt).ToString();
+                    string _damage_received = (GlobalVariables.Response_WG.data.account.statistics.all.damage_received - GlobalVariables.Response_WG_Send.data.account.statistics.all.damage_received).ToString();
+                    string _dropped_capture_points = (GlobalVariables.Response_WG.data.account.statistics.all.dropped_capture_points - GlobalVariables.Response_WG_Send.data.account.statistics.all.dropped_capture_points).ToString();
+                    string _frags = (GlobalVariables.Response_WG.data.account.statistics.all.frags - GlobalVariables.Response_WG_Send.data.account.statistics.all.frags).ToString();
+                    string _frags8p = (GlobalVariables.Response_WG.data.account.statistics.all.frags8p - GlobalVariables.Response_WG_Send.data.account.statistics.all.frags8p).ToString();
+                    string _hits = (GlobalVariables.Response_WG.data.account.statistics.all.hits - GlobalVariables.Response_WG_Send.data.account.statistics.all.hits).ToString();
+                    string _losses = (GlobalVariables.Response_WG.data.account.statistics.all.losses - GlobalVariables.Response_WG_Send.data.account.statistics.all.losses).ToString();
+                    string _max_frags = (GlobalVariables.Response_WG.data.account.statistics.all.max_frags - GlobalVariables.Response_WG_Send.data.account.statistics.all.max_frags).ToString();
+                    string _max_xp = (GlobalVariables.Response_WG.data.account.statistics.all.max_xp - GlobalVariables.Response_WG_Send.data.account.statistics.all.max_xp).ToString();
+                    string _shots = (GlobalVariables.Response_WG.data.account.statistics.all.shots - GlobalVariables.Response_WG_Send.data.account.statistics.all.shots).ToString();
+                    string _spotted = (GlobalVariables.Response_WG.data.account.statistics.all.spotted - GlobalVariables.Response_WG_Send.data.account.statistics.all.spotted).ToString();
+                    string _survived_battles = (GlobalVariables.Response_WG.data.account.statistics.all.survived_battles - GlobalVariables.Response_WG_Send.data.account.statistics.all.survived_battles).ToString();
+                    string _win_and_survived = (GlobalVariables.Response_WG.data.account.statistics.all.win_and_survived - GlobalVariables.Response_WG_Send.data.account.statistics.all.win_and_survived).ToString();
+                    string _wins = (GlobalVariables.Response_WG.data.account.statistics.all.wins - GlobalVariables.Response_WG_Send.data.account.statistics.all.wins).ToString();
+                    string _xp = (GlobalVariables.Response_WG.data.account.statistics.all.xp - GlobalVariables.Response_WG_Send.data.account.statistics.all.xp).ToString();
+                    string _credits = (GlobalVariables.Response_WG.data.account.@private.credits - GlobalVariables.Response_WG_Send.data.account.@private.credits).ToString();
+                    string _gold = (GlobalVariables.Response_WG.data.account.@private.gold - GlobalVariables.Response_WG_Send.data.account.@private.gold).ToString();
+                    string _free_xp = (GlobalVariables.Response_WG.data.account.@private.free_xp - GlobalVariables.Response_WG_Send.data.account.@private.free_xp).ToString();
+                    string _battle_life_time = GlobalVariables.Response_WG.data.account.@private.battle_life_time.ToString();
+                    string _is_premium = GlobalVariables.Response_WG.data.account.@private.is_premium ? "1" : "0";
 
+                    await SendData(_user_id, _account_id, _fraction_id, _wg_region, _battle_type_id, _damage_blocked, _tank_durability, _capture_points, _damage_dealt, _damage_received, _dropped_capture_points,
+                        _frags, _frags8p, _hits, _losses, _max_frags, _max_xp, _shots, _spotted, _survived_battles, _win_and_survived, _wins, _xp, _credits, _gold, _free_xp, _battle_life_time, _is_premium);
+
+                    File.WriteAllText($"{account_id}_send.json", JsonConvert.SerializeObject(GlobalVariables.Response_WG));
+
+                    GlobalVariables.IsSendNoilty = true;
                 }
                 else if (GlobalVariables.Response_WG.data.account.statistics.clan.battles > GlobalVariables.Response_WG_Send.data.account.statistics.clan.battles)
                 {

@@ -59,7 +59,16 @@
                         <Image x:Name="ImgHealth" Grid.Column="1" Source="/Assets/Images/Strength Points.png" Width="110" Height="25" HorizontalAlignment="Left" Opacity=".9"/>
                         <TextBlock x:Name="StrengthText" Text="0" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" FontWeight="Bold" Margin="30 3 0 0" Opacity=".9"/>
                     </Grid>
-                    <Label x:Name="TestLabel" Foreground="White" Content="Something"/>
+                    <Label x:Name="TestLabel" Foreground="White" Content="Something">
+                        <Label.Effect>
+                            <DropShadowEffect
+                              ShadowDepth="4"
+                              Direction="330"
+                              Color="Black"
+                              Opacity="0.5"
+                             BlurRadius="4"/>
+                        </Label.Effect>
+                    </Label>
                 </StackPanel>
             </Grid>
         </Grid>

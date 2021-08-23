@@ -52,7 +52,7 @@ namespace HUDBlitz.Views
         public void StartTimer()
         {
             DispatcherTimer TimerPostCombatStatistics = new DispatcherTimer();
-            TimerPostCombatStatistics.Interval = TimeSpan.FromSeconds(1);
+            TimerPostCombatStatistics.Interval = TimeSpan.FromSeconds(2);
             TimerPostCombatStatistics.Tick += AccountInfo;
             TimerPostCombatStatistics.Start();
         }
