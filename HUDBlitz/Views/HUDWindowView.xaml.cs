@@ -117,6 +117,9 @@ namespace HUDBlitz.Views
             DealtText.Text = (MaxDealt == 0) ? " 0" : $"{MaxDealt:# ### ###}";
             ReceivedText.Text = (MaxReceived == 0) ? " 0" : $"{MaxReceived:# ### ###}";
             StrengthText.Text = (Strength == 0) ? " 0" : $"{Strength:# ### ###}";
+
+            GlobalVariables.MaxReceived = MaxReceived;
+            GlobalVariables.Strength = Strength;
         }
 
         #endregion

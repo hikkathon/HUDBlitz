@@ -22,6 +22,11 @@ namespace HUDBlitz.Models
         /// </summary>
         public static Noilty.Response response_Noilty;
         public static string IsHashValid = "error";
+        public static bool IsSendNoilty = true;
+        public static Response Response_WG_Send;
+
+        public static int MaxReceived;
+        public static int Strength;
 
         // Переменные Сканера памяти
         public static bool IsEnabledGame = false;

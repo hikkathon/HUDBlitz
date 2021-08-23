@@ -40,6 +40,7 @@
         public string language_native_name { get; set; }
         public string language_iso_code { get; set; }
         public string gender_name { get; set; }
+        public string fractions { get; set; }
     }
 
     public class Data
