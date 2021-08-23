@@ -141,13 +141,13 @@ namespace HUDBlitz.Views
                 UserPassword.IsEnabled = false;
                 btnLogin.Content = "Запустить HUD";
 
-                await API.GetAccountInfo(
-                    "d2bfb95adbc6f34fb32c4924b4c93fa4",
-                    GlobalVariables.response_Noilty.data.user.wg_account_id.ToString(),
-                    GlobalVariables.response_Noilty.data.user.wg_access_token,
-                    GlobalVariables.response_Noilty.data.user.wg_region);
+                //await API.GetAccountInfo(
+                //    "d2bfb95adbc6f34fb32c4924b4c93fa4",
+                //    GlobalVariables.response_Noilty.data.user.wg_account_id.ToString(),
+                //    GlobalVariables.response_Noilty.data.user.wg_access_token,
+                //    GlobalVariables.response_Noilty.data.user.wg_region);
 
-                LabelNick.Content = $"{GlobalVariables.Response_WG.data.account.nickname}";
+                //LabelNick.Content = $"{GlobalVariables.Response_WG.data.account.nickname}";
             }
             else
             {

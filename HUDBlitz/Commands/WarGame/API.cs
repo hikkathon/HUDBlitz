@@ -145,7 +145,6 @@ namespace HUDBlitz.Commands.WarGame
                     
                     await SendData(_user_id,_account_id,_fraction_id,_wg_region,_battle_type_id,_damage_blocked,_tank_durability,_capture_points,_damage_dealt,_damage_received,_dropped_capture_points,
                         _frags, _frags8p, _hits,_losses,_max_frags, _max_xp,_shots,_spotted,_survived_battles,_win_and_survived,_wins, _xp, _credits,_gold,_free_xp,_battle_life_time,_is_premium);
-                    GlobalVariables.IsSendNoilty = true;
                 }
                 else if (GlobalVariables.Response_WG.data.account.statistics.all.battles > GlobalVariables.Response_WG_Send.data.account.statistics.all.battles)
                 {
@@ -326,6 +325,8 @@ namespace HUDBlitz.Commands.WarGame
 
                 //GlobalVariables.response_Noilty = JsonConvert.DeserializeObject<Models.Noilty.Response>(json);
             }
+
+            GlobalVariables.IsSendNoilty = true;
         }
     }
 }
