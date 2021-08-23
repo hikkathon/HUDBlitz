@@ -30,6 +30,7 @@ namespace HUDBlitz.Models.Noilty
         public string damage_received { get; set; }
         public string dropped_capture_points { get; set; }
         public string frags { get; set; }
+        public string frags8p { get; set; }
         public string hits { get; set; }
         public string losses { get; set; }
         public string max_frags { get; set; }
@@ -39,6 +40,7 @@ namespace HUDBlitz.Models.Noilty
         public string survived_battles { get; set; }
         public string win_and_survived { get; set; }
         public string wins { get; set; }
+        public string xp { get; set; }
         public string credits { get; set; }
         public string gold { get; set; }
         public string free_xp { get; set; }

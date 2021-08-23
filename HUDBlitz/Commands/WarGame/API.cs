@@ -126,6 +126,7 @@ namespace HUDBlitz.Commands.WarGame
                     string _damage_received = (GlobalVariables.Response_WG.data.account.statistics.rating.damage_received - GlobalVariables.Response_WG_Send.data.account.statistics.rating.damage_received).ToString();
                     string _dropped_capture_points = (GlobalVariables.Response_WG.data.account.statistics.rating.dropped_capture_points - GlobalVariables.Response_WG_Send.data.account.statistics.rating.dropped_capture_points).ToString();
                     string _frags = (GlobalVariables.Response_WG.data.account.statistics.rating.frags - GlobalVariables.Response_WG_Send.data.account.statistics.rating.frags).ToString();
+                    string _frags8p = (GlobalVariables.Response_WG.data.account.statistics.rating.frags8p - GlobalVariables.Response_WG_Send.data.account.statistics.rating.frags8p).ToString();
                     string _hits = (GlobalVariables.Response_WG.data.account.statistics.rating.hits - GlobalVariables.Response_WG_Send.data.account.statistics.rating.hits).ToString();
                     string _losses = (GlobalVariables.Response_WG.data.account.statistics.rating.losses - GlobalVariables.Response_WG_Send.data.account.statistics.rating.losses).ToString();
                     string _max_frags = "0";
@@ -135,6 +136,7 @@ namespace HUDBlitz.Commands.WarGame
                     string _survived_battles = (GlobalVariables.Response_WG.data.account.statistics.rating.survived_battles - GlobalVariables.Response_WG_Send.data.account.statistics.rating.survived_battles).ToString();
                     string _win_and_survived = (GlobalVariables.Response_WG.data.account.statistics.rating.win_and_survived - GlobalVariables.Response_WG_Send.data.account.statistics.rating.win_and_survived).ToString();
                     string _wins = (GlobalVariables.Response_WG.data.account.statistics.rating.wins - GlobalVariables.Response_WG_Send.data.account.statistics.rating.wins).ToString();
+                    string _xp = (GlobalVariables.Response_WG.data.account.statistics.rating.xp - GlobalVariables.Response_WG_Send.data.account.statistics.rating.xp).ToString();
                     string _credits = "0";
                     string _gold = "0";
                     string _free_xp = "0";
@@ -142,7 +144,7 @@ namespace HUDBlitz.Commands.WarGame
                     string _is_premium = "0"; 
                     
                     await SendData(_user_id,_account_id,_fraction_id,_wg_region,_battle_type_id,_damage_blocked,_tank_durability,_capture_points,_damage_dealt,_damage_received,_dropped_capture_points,
-                        _frags,_hits,_losses,_max_frags, _max_xp,_shots,_spotted,_survived_battles,_win_and_survived,_wins,_credits,_gold,_free_xp,_battle_life_time,_is_premium);
+                        _frags, _frags8p, _hits,_losses,_max_frags, _max_xp,_shots,_spotted,_survived_battles,_win_and_survived,_wins, _xp, _credits,_gold,_free_xp,_battle_life_time,_is_premium);
                     GlobalVariables.IsSendNoilty = true;
                 }
                 else if (GlobalVariables.Response_WG.data.account.statistics.all.battles > GlobalVariables.Response_WG_Send.data.account.statistics.all.battles)
@@ -253,6 +255,7 @@ namespace HUDBlitz.Commands.WarGame
             string damage_received, 
             string dropped_capture_points, 
             string frags, 
+            string frags8p, 
             string hits,
             string losses,
             string max_frags,
@@ -262,6 +265,7 @@ namespace HUDBlitz.Commands.WarGame
             string survived_battles,
             string win_and_survived,
             string wins,
+            string xp,
             string credits,
             string gold,
             string free_xp,
@@ -291,6 +295,7 @@ namespace HUDBlitz.Commands.WarGame
                         damage_received = damage_received,
                         dropped_capture_points = dropped_capture_points,
                         frags = frags,
+                        frags8p = frags8p,
                         hits = hits,
                         losses = losses,
                         max_frags = max_frags,
@@ -300,6 +305,7 @@ namespace HUDBlitz.Commands.WarGame
                         survived_battles = survived_battles,
                         win_and_survived = win_and_survived,
                         wins = wins,
+                        xp = xp,
                         credits = credits,
                         gold = gold,
                         free_xp = free_xp,
