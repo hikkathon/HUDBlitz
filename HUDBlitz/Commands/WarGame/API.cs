@@ -36,14 +36,14 @@ namespace HUDBlitz.Commands.WarGame
                 int i = original.IndexOf(substring);
                 string resultJson = original.Remove(i, substring.Length).Insert(i, "account");
 
-                GlobalVariables.Response_WG = JsonConvert.DeserializeObject<Response>(resultJson);
+                GlobalVariables.Response_WG = JsonConvert.DeserializeObject<Models.Player.Response>(resultJson);
                 GlobalVariables.Response_WG_Static = File.Exists($"{account_id}.json") ?
-                    JsonConvert.DeserializeObject<Response>(File.ReadAllText($"{account_id}.json")) :
-                    JsonConvert.DeserializeObject<Response>(resultJson);
+                    JsonConvert.DeserializeObject<Models.Player.Response>(File.ReadAllText($"{account_id}.json")) :
+                    JsonConvert.DeserializeObject<Models.Player.Response>(resultJson);
 
                 GlobalVariables.Response_WG_Send = File.Exists($"{account_id}_send.json") ?
-                    JsonConvert.DeserializeObject<Response>(File.ReadAllText($"{account_id}_send.json")) :
-                    JsonConvert.DeserializeObject<Response>(resultJson);
+                    JsonConvert.DeserializeObject<Models.Player.Response>(File.ReadAllText($"{account_id}_send.json")) :
+                    JsonConvert.DeserializeObject<Models.Player.Response>(resultJson);
 
                 while (GlobalVariables.check)
                 {
@@ -51,7 +51,7 @@ namespace HUDBlitz.Commands.WarGame
                     GlobalVariables.check = false;
                 }
 
-                if (GlobalVariables.IsSendNoilty)
+                while (GlobalVariables.IsSendNoilty)
                 {
                     File.WriteAllText($"{account_id}_send.json", JsonConvert.SerializeObject(GlobalVariables.Response_WG_Send));
                     GlobalVariables.IsSendNoilty = false;
@@ -79,46 +79,46 @@ namespace HUDBlitz.Commands.WarGame
                 {
                     GlobalVariables.battleType = BattleType.ORDINARY;
                     CalculateStatistics(
-    GlobalVariables.battleType,
-    GlobalVariables.Response_WG.data.account.statistics.all.wins, GlobalVariables.Response_WG_Static.data.account.statistics.all.wins,
-    GlobalVariables.Response_WG.data.account.statistics.all.battles, GlobalVariables.Response_WG_Static.data.account.statistics.all.battles,
-    GlobalVariables.Response_WG.data.account.statistics.all.frags, GlobalVariables.Response_WG_Static.data.account.statistics.all.frags,
-    GlobalVariables.Response_WG.data.account.statistics.all.survived_battles, GlobalVariables.Response_WG_Static.data.account.statistics.all.survived_battles,
-    GlobalVariables.Response_WG.data.account.statistics.all.hits, GlobalVariables.Response_WG_Static.data.account.statistics.all.hits,
-    GlobalVariables.Response_WG.data.account.statistics.all.shots, GlobalVariables.Response_WG_Static.data.account.statistics.all.shots,
-    GlobalVariables.Battles - GlobalVariables.Survived_battles,
-    GlobalVariables.Response_WG.data.account.statistics.all.damage_dealt, GlobalVariables.Response_WG_Static.data.account.statistics.all.damage_dealt,
-    GlobalVariables.Response_WG.data.account.statistics.all.damage_received, GlobalVariables.Response_WG_Static.data.account.statistics.all.damage_received,
-    GlobalVariables.Response_WG.data.account.statistics.all.spotted, GlobalVariables.Response_WG_Static.data.account.statistics.all.spotted,
-    GlobalVariables.Response_WG.data.account.statistics.all.dropped_capture_points, GlobalVariables.Response_WG_Static.data.account.statistics.all.dropped_capture_points,
-    GlobalVariables.Response_WG.data.account.statistics.all.capture_points, GlobalVariables.Response_WG_Static.data.account.statistics.all.capture_points);
+                        GlobalVariables.battleType,
+                        GlobalVariables.Response_WG.data.account.statistics.all.wins, GlobalVariables.Response_WG_Static.data.account.statistics.all.wins,
+                        GlobalVariables.Response_WG.data.account.statistics.all.battles, GlobalVariables.Response_WG_Static.data.account.statistics.all.battles,
+                        GlobalVariables.Response_WG.data.account.statistics.all.frags, GlobalVariables.Response_WG_Static.data.account.statistics.all.frags,
+                        GlobalVariables.Response_WG.data.account.statistics.all.survived_battles, GlobalVariables.Response_WG_Static.data.account.statistics.all.survived_battles,
+                        GlobalVariables.Response_WG.data.account.statistics.all.hits, GlobalVariables.Response_WG_Static.data.account.statistics.all.hits,
+                        GlobalVariables.Response_WG.data.account.statistics.all.shots, GlobalVariables.Response_WG_Static.data.account.statistics.all.shots,
+                        GlobalVariables.Battles - GlobalVariables.Survived_battles,
+                        GlobalVariables.Response_WG.data.account.statistics.all.damage_dealt, GlobalVariables.Response_WG_Static.data.account.statistics.all.damage_dealt,
+                        GlobalVariables.Response_WG.data.account.statistics.all.damage_received, GlobalVariables.Response_WG_Static.data.account.statistics.all.damage_received,
+                        GlobalVariables.Response_WG.data.account.statistics.all.spotted, GlobalVariables.Response_WG_Static.data.account.statistics.all.spotted,
+                        GlobalVariables.Response_WG.data.account.statistics.all.dropped_capture_points, GlobalVariables.Response_WG_Static.data.account.statistics.all.dropped_capture_points,
+                        GlobalVariables.Response_WG.data.account.statistics.all.capture_points, GlobalVariables.Response_WG_Static.data.account.statistics.all.capture_points);
                 }
                 else if (GlobalVariables.Response_WG.data.account.statistics.clan.battles > GlobalVariables.Response_WG_Static.data.account.statistics.clan.battles)
                 {
                     GlobalVariables.battleType = BattleType.CLAN;
                     CalculateStatistics(
-    GlobalVariables.battleType,
-    GlobalVariables.Response_WG.data.account.statistics.clan.wins, GlobalVariables.Response_WG_Static.data.account.statistics.clan.wins,
-    GlobalVariables.Response_WG.data.account.statistics.clan.battles, GlobalVariables.Response_WG_Static.data.account.statistics.clan.battles,
-    GlobalVariables.Response_WG.data.account.statistics.clan.frags, GlobalVariables.Response_WG_Static.data.account.statistics.clan.frags,
-    GlobalVariables.Response_WG.data.account.statistics.clan.survived_battles, GlobalVariables.Response_WG_Static.data.account.statistics.clan.survived_battles,
-    GlobalVariables.Response_WG.data.account.statistics.clan.hits, GlobalVariables.Response_WG_Static.data.account.statistics.clan.hits,
-    GlobalVariables.Response_WG.data.account.statistics.clan.shots, GlobalVariables.Response_WG_Static.data.account.statistics.clan.shots,
-    GlobalVariables.Battles - GlobalVariables.Survived_battles,
-    GlobalVariables.Response_WG.data.account.statistics.clan.damage_dealt, GlobalVariables.Response_WG_Static.data.account.statistics.clan.damage_dealt,
-    GlobalVariables.Response_WG.data.account.statistics.clan.damage_received, GlobalVariables.Response_WG_Static.data.account.statistics.clan.damage_received,
-    GlobalVariables.Response_WG.data.account.statistics.clan.spotted, GlobalVariables.Response_WG_Static.data.account.statistics.clan.spotted,
-    GlobalVariables.Response_WG.data.account.statistics.clan.dropped_capture_points, GlobalVariables.Response_WG_Static.data.account.statistics.clan.dropped_capture_points,
-    GlobalVariables.Response_WG.data.account.statistics.clan.capture_points, GlobalVariables.Response_WG_Static.data.account.statistics.clan.capture_points);
+                        GlobalVariables.battleType,
+                        GlobalVariables.Response_WG.data.account.statistics.clan.wins, GlobalVariables.Response_WG_Static.data.account.statistics.clan.wins,
+                        GlobalVariables.Response_WG.data.account.statistics.clan.battles, GlobalVariables.Response_WG_Static.data.account.statistics.clan.battles,
+                        GlobalVariables.Response_WG.data.account.statistics.clan.frags, GlobalVariables.Response_WG_Static.data.account.statistics.clan.frags,
+                        GlobalVariables.Response_WG.data.account.statistics.clan.survived_battles, GlobalVariables.Response_WG_Static.data.account.statistics.clan.survived_battles,
+                        GlobalVariables.Response_WG.data.account.statistics.clan.hits, GlobalVariables.Response_WG_Static.data.account.statistics.clan.hits,
+                        GlobalVariables.Response_WG.data.account.statistics.clan.shots, GlobalVariables.Response_WG_Static.data.account.statistics.clan.shots,
+                        GlobalVariables.Battles - GlobalVariables.Survived_battles,
+                        GlobalVariables.Response_WG.data.account.statistics.clan.damage_dealt, GlobalVariables.Response_WG_Static.data.account.statistics.clan.damage_dealt,
+                        GlobalVariables.Response_WG.data.account.statistics.clan.damage_received, GlobalVariables.Response_WG_Static.data.account.statistics.clan.damage_received,
+                        GlobalVariables.Response_WG.data.account.statistics.clan.spotted, GlobalVariables.Response_WG_Static.data.account.statistics.clan.spotted,
+                        GlobalVariables.Response_WG.data.account.statistics.clan.dropped_capture_points, GlobalVariables.Response_WG_Static.data.account.statistics.clan.dropped_capture_points,
+                        GlobalVariables.Response_WG.data.account.statistics.clan.capture_points, GlobalVariables.Response_WG_Static.data.account.statistics.clan.capture_points);
                 }
 
                 if (GlobalVariables.Response_WG.data.account.statistics.rating.battles > GlobalVariables.Response_WG_Send.data.account.statistics.rating.battles)
                 {
                     string _user_id = GlobalVariables.response_Noilty.data.account.user_id.ToString();
                     string _account_id = GlobalVariables.Response_WG.data.account.account_id.ToString();
-                    string _fraction_id = GlobalVariables.response_Noilty.data.account.fractions;
+                    string _fraction_id = GlobalVariables.response_Noilty.data.account.fraction_id.ToString();
                     string _wg_region = GlobalVariables.response_Noilty.data.user.wg_region;
-                    BattleType _battle_type_id = GlobalVariables.battleType;
+                    string _battle_type_id = ((int)GlobalVariables.battleType).ToString();
                     string _damage_blocked = GlobalVariables.MaxReceived.ToString();
                     string _tank_durability = GlobalVariables.Strength.ToString();
                     string _capture_points = (GlobalVariables.Response_WG.data.account.statistics.rating.battles - GlobalVariables.Response_WG_Send.data.account.statistics.rating.battles).ToString();
@@ -128,18 +128,18 @@ namespace HUDBlitz.Commands.WarGame
                     string _frags = (GlobalVariables.Response_WG.data.account.statistics.rating.frags - GlobalVariables.Response_WG_Send.data.account.statistics.rating.frags).ToString();
                     string _hits = (GlobalVariables.Response_WG.data.account.statistics.rating.hits - GlobalVariables.Response_WG_Send.data.account.statistics.rating.hits).ToString();
                     string _losses = (GlobalVariables.Response_WG.data.account.statistics.rating.losses - GlobalVariables.Response_WG_Send.data.account.statistics.rating.losses).ToString();
-                    string _max_frags = "";
-                    string _max_xp = "";
+                    string _max_frags = "0";
+                    string _max_xp = "0";
                     string _shots = (GlobalVariables.Response_WG.data.account.statistics.rating.shots - GlobalVariables.Response_WG_Send.data.account.statistics.rating.shots).ToString();
                     string _spotted = (GlobalVariables.Response_WG.data.account.statistics.rating.spotted - GlobalVariables.Response_WG_Send.data.account.statistics.rating.spotted).ToString();
                     string _survived_battles = (GlobalVariables.Response_WG.data.account.statistics.rating.survived_battles - GlobalVariables.Response_WG_Send.data.account.statistics.rating.survived_battles).ToString();
                     string _win_and_survived = (GlobalVariables.Response_WG.data.account.statistics.rating.win_and_survived - GlobalVariables.Response_WG_Send.data.account.statistics.rating.win_and_survived).ToString();
                     string _wins = (GlobalVariables.Response_WG.data.account.statistics.rating.wins - GlobalVariables.Response_WG_Send.data.account.statistics.rating.wins).ToString();
-                    string _credits = "";
-                    string _gold = "";
-                    string _free_xp = "";
-                    string _battle_life_time = "";
-                    string _is_premium = ""; 
+                    string _credits = "0";
+                    string _gold = "0";
+                    string _free_xp = "0";
+                    string _battle_life_time = "0";
+                    string _is_premium = "0"; 
                     
                     await SendData(_user_id,_account_id,_fraction_id,_wg_region,_battle_type_id,_damage_blocked,_tank_durability,_capture_points,_damage_dealt,_damage_received,_dropped_capture_points,
                         _frags,_hits,_losses,_max_frags, _max_xp,_shots,_spotted,_survived_battles,_win_and_survived,_wins,_credits,_gold,_free_xp,_battle_life_time,_is_premium);
@@ -245,7 +245,7 @@ namespace HUDBlitz.Commands.WarGame
             string account_id,
             string fraction_id, 
             string wg_region, 
-            BattleType battle_type_id, 
+            string battle_type_id, 
             string damage_blocked, 
             string tank_durability, 
             string capture_points,
@@ -272,42 +272,54 @@ namespace HUDBlitz.Commands.WarGame
             {
                 client.BaseAddress = new Uri($"http://blitzbury.noilty.loc");
 
+                GlobalVariables.battleResponse = new Models.Noilty.BattleResponse
+                {
+                    auth_token = GlobalVariables.response_Noilty.data.user.auth_token,
+                    password = GlobalVariables.password,
+
+                    battle = new Models.Noilty.Battle
+                    {
+                        user_id = user_id,
+                        account_id = account_id,
+                        fraction_id = fraction_id,
+                        wg_region = wg_region,
+                        battle_type_id = battle_type_id,
+                        damage_blocked = damage_blocked,
+                        tank_durability = tank_durability,
+                        capture_points = capture_points,
+                        damage_dealt = damage_dealt,
+                        damage_received = damage_received,
+                        dropped_capture_points = dropped_capture_points,
+                        frags = frags,
+                        hits = hits,
+                        losses = losses,
+                        max_frags = max_frags,
+                        max_xp = max_xp,
+                        shots = shots,
+                        spotted = spotted,
+                        survived_battles = survived_battles,
+                        win_and_survived = win_and_survived,
+                        wins = wins,
+                        credits = credits,
+                        gold = gold,
+                        free_xp = free_xp,
+                        battle_life_time = battle_life_time,
+                        is_premium = is_premium
+                    }
+            };
+
+                var battleJson = JsonConvert.SerializeObject(GlobalVariables.battleResponse);
+
                 var content = new FormUrlEncodedContent(new[]
                 {
-                    new KeyValuePair<string, string>("user_id", user_id),
-                    new KeyValuePair<string, string>("account_id", account_id),
-                    new KeyValuePair<string, string>("fraction_id", fraction_id),
-                    new KeyValuePair<string, string>("wg_region", wg_region),
-                    new KeyValuePair<string, string>("battle_type_id", battle_type_id.ToString()),
-                    new KeyValuePair<string, string>("damage_blocked", damage_blocked),
-                    new KeyValuePair<string, string>("tank_durability", tank_durability),
-                    new KeyValuePair<string, string>("capture_points", capture_points),
-                    new KeyValuePair<string, string>("damage_dealt", damage_dealt),
-                    new KeyValuePair<string, string>("damage_received", damage_received),
-                    new KeyValuePair<string, string>("dropped_capture_points", dropped_capture_points),
-                    new KeyValuePair<string, string>("frags", frags),
-                    new KeyValuePair<string, string>("hits", hits),
-                    new KeyValuePair<string, string>("losses", losses),
-                    new KeyValuePair<string, string>("max_frags", max_frags),
-                    new KeyValuePair<string, string>("max_xp", max_xp),
-                    new KeyValuePair<string, string>("shots", shots),
-                    new KeyValuePair<string, string>("spotted", spotted),
-                    new KeyValuePair<string, string>("survived_battles", survived_battles),
-                    new KeyValuePair<string, string>("win_and_survived", win_and_survived),
-                    new KeyValuePair<string, string>("wins", wins),
-                    new KeyValuePair<string, string>("credits", credits),
-                    new KeyValuePair<string, string>("gold", gold),
-                    new KeyValuePair<string, string>("free_xp", free_xp),
-                    new KeyValuePair<string, string>("battle_life_time", battle_life_time),
-                    new KeyValuePair<string, string>("is_premium", is_premium),
+                    new KeyValuePair<string, string>("battle", battleJson),
                 });
 
                 var response = await client.PostAsync("api/push-data/from/desktop-app", content);
                 string json = await response.Content.ReadAsStringAsync();
 
-                GlobalVariables.response_Noilty = JsonConvert.DeserializeObject<Models.Noilty.Response>(json);
+                //GlobalVariables.response_Noilty = JsonConvert.DeserializeObject<Models.Noilty.Response>(json);
             }
         }
-
     }
 }

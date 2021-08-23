@@ -1,5 +1,6 @@
 ﻿namespace HUDBlitz.Models.Noilty
 {
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
     public class User
     {
         public int id { get; set; }
@@ -17,15 +18,15 @@
 
     public class Account
     {
-        public int account_id { get; set; }
+        public int id { get; set; }
         public int user_id { get; set; }
         public string surname { get; set; }
         public string name { get; set; }
         public string balance { get; set; }
         public string date_birth { get; set; }
-        public string about { get; set; }
-        public string website { get; set; }
-        public string social_networks { get; set; }
+        public object about { get; set; }
+        public object website { get; set; }
+        public object social_networks { get; set; }
         public object verified_at { get; set; }
         public string password { get; set; }
         public string created_at { get; set; }
@@ -40,7 +41,12 @@
         public string language_native_name { get; set; }
         public string language_iso_code { get; set; }
         public string gender_name { get; set; }
-        public string fractions { get; set; }
+        public string gender_url_logo { get; set; }
+        public int fraction_id { get; set; }
+        public string fraction_name { get; set; }
+        public string fraction_color { get; set; }
+        public string fraction_description { get; set; }
+        public string fraction_url_logo { get; set; }
     }
 
     public class Data
@@ -55,4 +61,6 @@
         public string message { get; set; }
         public Data data { get; set; }
     }
+
+
 }

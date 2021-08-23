@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\WarGame\API.cs" />
+    <Compile Include="Models\Noilty\BattleResponse.cs" />
     <Compile Include="Views\NotificationWindowView.xaml.cs">
       <DependentUpon>NotificationWindowView.xaml</DependentUpon>
     </Compile>

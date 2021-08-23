@@ -64,6 +64,7 @@ namespace HUDBlitz.Views
             }
             else
             {
+                GlobalVariables.password = UserPassword.Password;
                 await AuthPassword(UserPassword.Password, GlobalVariables.response_Noilty.data.account.password);
             }
         }

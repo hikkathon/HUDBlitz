@@ -1,5 +1,4 @@
 ﻿using HUDBlitz.Commands;
-using HUDBlitz.Models.Player;
 using System.Net.Http;
 using System.Windows.Threading;
 using static HUDBlitz.Commands.WarGame.API;
@@ -11,11 +10,11 @@ namespace HUDBlitz.Models
         /// <summary>
         /// Player : Информаци о игроке, обновляется каждый тик таймера
         /// </summary>
-        public static Response Response_WG;
+        public static Player.Response Response_WG;
         /// <summary>
         /// Player : Информаци о игроке, статическая. Записывается при первом запуске HUD'а
         /// </summary>
-        public static Response Response_WG_Static;
+        public static Player.Response Response_WG_Static;
 
         /// <summary>
         /// Данные зарегестрированного ирока в топе Noilty
@@ -23,7 +22,9 @@ namespace HUDBlitz.Models
         public static Noilty.Response response_Noilty;
         public static string IsHashValid = "error";
         public static bool IsSendNoilty = true;
-        public static Response Response_WG_Send;
+        public static Player.Response Response_WG_Send;
+        public static Noilty.BattleResponse battleResponse;
+        public static string password;
 
         public static int MaxReceived;
         public static int Strength;
