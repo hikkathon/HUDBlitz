@@ -57,8 +57,10 @@ namespace HUDBlitz.Views
             TimerPostCombatStatistics.Start();
         }
 
+        public int count;
         private async void AccountInfo(object sender, EventArgs e)
         {
+            count++;
             await API.GetAccountInfo("d2bfb95adbc6f34fb32c4924b4c93fa4", GlobalVariables.response_Noilty.data.user.wg_account_id.ToString(), GlobalVariables.response_Noilty.data.user.wg_access_token, GlobalVariables.response_Noilty.data.user.wg_region);  
             TestLabel.Content = 
                 $"Mode:\t\t\t{GlobalVariables.battleType}\n" +
@@ -71,7 +73,8 @@ namespace HUDBlitz.Views
                 $"Damage Received:\t{GlobalVariables.Damage_received}\t({Math.Round((float)GlobalVariables.Damage_received / (float)GlobalVariables.Battles, 0).ToString().Replace("не число", "0")})\n" +
                 $"Spotted:\t\t\t{GlobalVariables.Spotted}\t({Math.Round((float)GlobalVariables.Spotted / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
                 $"Defence:\t\t\t{GlobalVariables.Dropped_capture_points}\t({Math.Round((float)GlobalVariables.Dropped_capture_points / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
-                $"Capture:\t\t\t{GlobalVariables.Capture_points}\t({Math.Round((float)GlobalVariables.Capture_points / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n";
+                $"Capture:\t\t\t{GlobalVariables.Capture_points}\t({Math.Round((float)GlobalVariables.Capture_points / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
+                $"Count: {count}, Send : {GlobalVariables.IsSendNoilty}, WG : {GlobalVariables.Response_WG.data.account.statistics.rating.battles}, Noilty : {GlobalVariables.Response_WG_Send.data.account.statistics.rating.battles} " ;
         }
 
         #region Damage Panel

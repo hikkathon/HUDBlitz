@@ -36,22 +36,23 @@ namespace HUDBlitz.Commands.WarGame
                 int i = original.IndexOf(substring);
                 string resultJson = original.Remove(i, substring.Length).Insert(i, "account");
 
-                GlobalVariables.Response_WG = JsonConvert.DeserializeObject<Models.Player.Response>(resultJson);
+                GlobalVariables.Response_WG = JsonConvert.DeserializeObject<Response>(resultJson);
+
                 GlobalVariables.Response_WG_Static = File.Exists($"{account_id}.json") ?
-                    JsonConvert.DeserializeObject<Models.Player.Response>(File.ReadAllText($"{account_id}.json")) :
-                    JsonConvert.DeserializeObject<Models.Player.Response>(resultJson);
+                    JsonConvert.DeserializeObject<Response>(File.ReadAllText($"{account_id}.json")) :
+                    JsonConvert.DeserializeObject<Response>(resultJson);
 
                 GlobalVariables.Response_WG_Send = File.Exists($"{account_id}_send.json") ?
-                    JsonConvert.DeserializeObject<Models.Player.Response>(File.ReadAllText($"{account_id}_send.json")) :
-                    JsonConvert.DeserializeObject<Models.Player.Response>(resultJson);
+                    JsonConvert.DeserializeObject<Response>(File.ReadAllText($"{account_id}_send.json")) :
+                    JsonConvert.DeserializeObject<Response>(resultJson);
 
-                while (GlobalVariables.check)
+                if (GlobalVariables.check)
                 {
                     File.WriteAllText($"{account_id}.json", JsonConvert.SerializeObject(GlobalVariables.Response_WG));
                     GlobalVariables.check = false;
                 }
 
-                while (GlobalVariables.IsSendNoilty)
+                if (GlobalVariables.IsSendNoilty)
                 {
                     File.WriteAllText($"{account_id}_send.json", JsonConvert.SerializeObject(GlobalVariables.Response_WG_Send));
                     GlobalVariables.IsSendNoilty = false;
@@ -115,7 +116,7 @@ namespace HUDBlitz.Commands.WarGame
                 if (GlobalVariables.Response_WG.data.account.statistics.rating.battles > GlobalVariables.Response_WG_Send.data.account.statistics.rating.battles)
                 {
                     string _user_id = GlobalVariables.response_Noilty.data.account.user_id.ToString();
-                    string _account_id = GlobalVariables.Response_WG.data.account.account_id.ToString();
+                    string _account_id = GlobalVariables.response_Noilty.data.account.id.ToString();
                     string _fraction_id = GlobalVariables.response_Noilty.data.account.fraction_id.ToString();
                     string _wg_region = GlobalVariables.response_Noilty.data.user.wg_region;
                     string _battle_type_id = ((int)GlobalVariables.battleType).ToString();
@@ -145,6 +146,10 @@ namespace HUDBlitz.Commands.WarGame
                     
                     await SendData(_user_id,_account_id,_fraction_id,_wg_region,_battle_type_id,_damage_blocked,_tank_durability,_capture_points,_damage_dealt,_damage_received,_dropped_capture_points,
                         _frags, _frags8p, _hits,_losses,_max_frags, _max_xp,_shots,_spotted,_survived_battles,_win_and_survived,_wins, _xp, _credits,_gold,_free_xp,_battle_life_time,_is_premium);
+
+                    File.WriteAllText($"{account_id}_send.json", JsonConvert.SerializeObject(GlobalVariables.Response_WG));
+
+                    GlobalVariables.IsSendNoilty = true;
                 }
                 else if (GlobalVariables.Response_WG.data.account.statistics.all.battles > GlobalVariables.Response_WG_Send.data.account.statistics.all.battles)
                 {
@@ -317,16 +322,14 @@ namespace HUDBlitz.Commands.WarGame
 
                 var content = new FormUrlEncodedContent(new[]
                 {
-                    new KeyValuePair<string, string>("battle", battleJson),
+                    new KeyValuePair<string, string>("data", battleJson),
                 });
 
-                var response = await client.PostAsync("api/push-data/from/desktop-app", content);
+                var response = await client.PostAsync("/api/push-data/from/desktop-app", content);
                 string json = await response.Content.ReadAsStringAsync();
 
                 //GlobalVariables.response_Noilty = JsonConvert.DeserializeObject<Models.Noilty.Response>(json);
             }
-
-            GlobalVariables.IsSendNoilty = true;
         }
     }
 }
