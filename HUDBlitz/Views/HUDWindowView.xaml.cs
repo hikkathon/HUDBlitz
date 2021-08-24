@@ -73,8 +73,8 @@ namespace HUDBlitz.Views
                 $"Damage Received:\t{GlobalVariables.Damage_received}\t({Math.Round((float)GlobalVariables.Damage_received / (float)GlobalVariables.Battles, 0).ToString().Replace("не число", "0")})\n" +
                 $"Spotted:\t\t\t{GlobalVariables.Spotted}\t({Math.Round((float)GlobalVariables.Spotted / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
                 $"Defence:\t\t\t{GlobalVariables.Dropped_capture_points}\t({Math.Round((float)GlobalVariables.Dropped_capture_points / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
-                $"Capture:\t\t\t{GlobalVariables.Capture_points}\t({Math.Round((float)GlobalVariables.Capture_points / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
-                $"Count: {count}, Send : {GlobalVariables.IsSendNoilty}, WG : {GlobalVariables.Response_WG.data.account.statistics.rating.battles}, Noilty : {GlobalVariables.Response_WG_Send.data.account.statistics.rating.battles} " ;
+                $"Capture:\t\t\t{GlobalVariables.Capture_points}\t({Math.Round((float)GlobalVariables.Capture_points / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n\n" +
+                $"Count: {count}, Send : {GlobalVariables.IsSendNoilty}" ;
         }
 
         #region Damage Panel

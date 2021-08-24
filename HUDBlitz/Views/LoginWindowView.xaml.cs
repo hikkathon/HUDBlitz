@@ -93,7 +93,7 @@ namespace HUDBlitz.Views
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri($"http://blitzbury.noilty.loc");
+                client.BaseAddress = new Uri($"http://www.blitzbury.noilty.com");
 
                 var content = new FormUrlEncodedContent(new[]
                 {
@@ -123,7 +123,7 @@ namespace HUDBlitz.Views
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri($"http://blitzbury.noilty.loc");
+                client.BaseAddress = new Uri($"http://www.blitzbury.noilty.com");
 
                 var content = new FormUrlEncodedContent(new[]
                 {

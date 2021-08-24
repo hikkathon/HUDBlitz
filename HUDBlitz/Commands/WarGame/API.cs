@@ -121,7 +121,7 @@ namespace HUDBlitz.Commands.WarGame
                     string _wg_region = GlobalVariables.response_Noilty.data.user.wg_region;
                     string _battle_type_id = ((int)GlobalVariables.battleType).ToString();
                     string _damage_blocked = GlobalVariables.MaxReceived.ToString();
-                    string _tank_durability = GlobalVariables.Strength.ToString();
+                    string _current_durability_tank = GlobalVariables.Strength.ToString();
                     string _capture_points = (GlobalVariables.Response_WG.data.account.statistics.rating.battles - GlobalVariables.Response_WG_Send.data.account.statistics.rating.battles).ToString();
                     string _damage_dealt = (GlobalVariables.Response_WG.data.account.statistics.rating.damage_dealt - GlobalVariables.Response_WG_Send.data.account.statistics.rating.damage_dealt).ToString();
                     string _damage_received = (GlobalVariables.Response_WG.data.account.statistics.rating.damage_received - GlobalVariables.Response_WG_Send.data.account.statistics.rating.damage_received).ToString();
@@ -144,7 +144,7 @@ namespace HUDBlitz.Commands.WarGame
                     string _battle_life_time = GlobalVariables.Response_WG.data.account.@private.battle_life_time.ToString();
                     string _is_premium = GlobalVariables.Response_WG.data.account.@private.is_premium ? "1" : "0"; 
                     
-                    await SendData(_user_id,_account_id,_fraction_id,_wg_region,_battle_type_id,_damage_blocked,_tank_durability,_capture_points,_damage_dealt,_damage_received,_dropped_capture_points,
+                    await SendData(_user_id,_account_id,_fraction_id,_wg_region,_battle_type_id,_damage_blocked,_current_durability_tank,_capture_points,_damage_dealt,_damage_received,_dropped_capture_points,
                         _frags, _frags8p, _hits,_losses,_max_frags, _max_xp,_shots,_spotted,_survived_battles,_win_and_survived,_wins, _xp, _credits,_gold,_free_xp,_battle_life_time,_is_premium);
 
                     File.WriteAllText($"{account_id}_send.json", JsonConvert.SerializeObject(GlobalVariables.Response_WG));
@@ -159,7 +159,7 @@ namespace HUDBlitz.Commands.WarGame
                     string _wg_region = GlobalVariables.response_Noilty.data.user.wg_region;
                     string _battle_type_id = ((int)GlobalVariables.battleType).ToString();
                     string _damage_blocked = GlobalVariables.MaxReceived.ToString();
-                    string _tank_durability = GlobalVariables.Strength.ToString();
+                    string _current_durability_tank = GlobalVariables.Strength.ToString();
                     string _capture_points = (GlobalVariables.Response_WG.data.account.statistics.all.battles - GlobalVariables.Response_WG_Send.data.account.statistics.all.battles).ToString();
                     string _damage_dealt = (GlobalVariables.Response_WG.data.account.statistics.all.damage_dealt - GlobalVariables.Response_WG_Send.data.account.statistics.all.damage_dealt).ToString();
                     string _damage_received = (GlobalVariables.Response_WG.data.account.statistics.all.damage_received - GlobalVariables.Response_WG_Send.data.account.statistics.all.damage_received).ToString();
@@ -182,7 +182,7 @@ namespace HUDBlitz.Commands.WarGame
                     string _battle_life_time = GlobalVariables.Response_WG.data.account.@private.battle_life_time.ToString();
                     string _is_premium = GlobalVariables.Response_WG.data.account.@private.is_premium ? "1" : "0";
 
-                    await SendData(_user_id, _account_id, _fraction_id, _wg_region, _battle_type_id, _damage_blocked, _tank_durability, _capture_points, _damage_dealt, _damage_received, _dropped_capture_points,
+                    await SendData(_user_id, _account_id, _fraction_id, _wg_region, _battle_type_id, _damage_blocked, _current_durability_tank, _capture_points, _damage_dealt, _damage_received, _dropped_capture_points,
                         _frags, _frags8p, _hits, _losses, _max_frags, _max_xp, _shots, _spotted, _survived_battles, _win_and_survived, _wins, _xp, _credits, _gold, _free_xp, _battle_life_time, _is_premium);
 
                     File.WriteAllText($"{account_id}_send.json", JsonConvert.SerializeObject(GlobalVariables.Response_WG));
@@ -287,7 +287,7 @@ namespace HUDBlitz.Commands.WarGame
             string wg_region, 
             string battle_type_id, 
             string damage_blocked, 
-            string tank_durability, 
+            string current_durability_tank, 
             string capture_points,
             string damage_dealt, 
             string damage_received, 
@@ -312,7 +312,7 @@ namespace HUDBlitz.Commands.WarGame
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri($"http://blitzbury.noilty.loc");
+                client.BaseAddress = new Uri($"http://www.blitzbury.noilty.com");
 
                 GlobalVariables.battleResponse = new Models.Noilty.BattleResponse
                 {
@@ -327,7 +327,7 @@ namespace HUDBlitz.Commands.WarGame
                         wg_region = wg_region,
                         battle_type_id = battle_type_id,
                         damage_blocked = damage_blocked,
-                        tank_durability = tank_durability,
+                        current_durability_tank = current_durability_tank,
                         capture_points = capture_points,
                         damage_dealt = damage_dealt,
                         damage_received = damage_received,

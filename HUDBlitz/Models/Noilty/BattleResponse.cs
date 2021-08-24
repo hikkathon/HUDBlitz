@@ -24,7 +24,7 @@ namespace HUDBlitz.Models.Noilty
         public string wg_region { get; set; }
         public string battle_type_id { get; set; }
         public string damage_blocked { get; set; }
-        public string tank_durability { get; set; }
+        public string current_durability_tank { get; set; }
         public string capture_points { get; set; }
         public string damage_dealt { get; set; }
         public string damage_received { get; set; }
