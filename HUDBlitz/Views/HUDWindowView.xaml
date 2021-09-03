@@ -37,40 +37,49 @@
 
         <!-- Контейнер для плашки хп/нанесенного/заблокированного урона -->
         <Grid x:Name="GridDamagePanel" Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                <StackPanel x:Name="StackPanelDamage" Grid.Row="0" Grid.Column="0" Margin="10 15 10 10">
+            <StackPanel x:Name="StackPanelDamage" Grid.Row="0" Grid.Column="0" Margin="10 15 10 10">
 
-                    <Grid x:Name="GridDamage">
-                        <Image x:Name="ImgDamage" Grid.Column="1"  Source="/Assets/Images/Damage Dealt.png" Width="110" Height="25" HorizontalAlignment="Left" Opacity=".9"/>
-                        <TextBlock x:Name="DealtText" Text="0" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" FontWeight="Bold" Margin="30 3 0 0" Opacity=".9"/>
-                    </Grid>
+                <Grid x:Name="GridDamage">
+                    <Image x:Name="ImgDamage" Grid.Column="1"  Source="/Assets/Images/Damage Dealt.png" Width="110" Height="25" HorizontalAlignment="Left" Opacity=".9"/>
+                    <TextBlock x:Name="DealtText" Text="0" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" FontWeight="Bold" Margin="30 3 0 0" Opacity=".9"/>
+                </Grid>
 
-                    <Grid x:Name="GridBlocked">
-                        <Image x:Name="ImgBlocked" Grid.Column="1"  Source="/Assets/Images/Damage Received.png" Width="110" Height="25" HorizontalAlignment="Left" Opacity=".9"/>
-                        <TextBlock x:Name="ReceivedText" Text="0" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" FontWeight="Bold" Margin="30 3 0 0" Opacity=".9"/>
-                    </Grid>
+                <Grid x:Name="GridBlocked">
+                    <Image x:Name="ImgBlocked" Grid.Column="1"  Source="/Assets/Images/Damage Received.png" Width="110" Height="25" HorizontalAlignment="Left" Opacity=".9"/>
+                    <TextBlock x:Name="ReceivedText" Text="0" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" FontWeight="Bold" Margin="30 3 0 0" Opacity=".9"/>
+                </Grid>
 
-                    <Grid x:Name="GridHealth">
-                        <Image x:Name="ImgHealth" Grid.Column="1" Source="/Assets/Images/Strength Points.png" Width="110" Height="25" HorizontalAlignment="Left" Opacity=".9"/>
-                        <TextBlock x:Name="StrengthText" Text="0" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" FontWeight="Bold" Margin="30 3 0 0" Opacity=".9"/>
-                    </Grid>
-                    <Label x:Name="TestLabel" Foreground="White" Content="Something">
-                        <Label.Effect>
-                            <DropShadowEffect
+                <Grid x:Name="GridHealth">
+                    <Image x:Name="ImgHealth" Grid.Column="1" Source="/Assets/Images/Strength Points.png" Width="110" Height="25" HorizontalAlignment="Left" Opacity=".9"/>
+                    <TextBlock x:Name="StrengthText" Text="0" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" FontWeight="Bold" Margin="30 3 0 0" Opacity=".9"/>
+                </Grid>
+
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="GridStats" Grid.Row="2" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="245"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel x:Name="BattleStatsPanel" Grid.Column="1">
+                <Label x:Name="BattleStatsLabel" Foreground="White" Content="Something">
+                    <Label.Effect>
+                        <DropShadowEffect
                               ShadowDepth="4"
                               Direction="330"
                               Color="Black"
                               Opacity="0.5"
                              BlurRadius="4"/>
-                        </Label.Effect>
-                    </Label>
-                </StackPanel>
-            </Grid>
+                    </Label.Effect>
+                </Label>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

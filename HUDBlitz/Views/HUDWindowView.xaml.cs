@@ -62,7 +62,7 @@ namespace HUDBlitz.Views
         {
             count++;
             await API.GetAccountInfo("d2bfb95adbc6f34fb32c4924b4c93fa4", GlobalVariables.response_Noilty.data.user.wg_account_id.ToString(), GlobalVariables.response_Noilty.data.user.wg_access_token, GlobalVariables.response_Noilty.data.user.wg_region);  
-            TestLabel.Content = 
+            BattleStatsLabel.Content = 
                 $"Mode:\t\t\t{GlobalVariables.battleType}\n" +
                 $"Nickname:\t\t{GlobalVariables.Response_WG.data.account.nickname}\n" +
                 $"Wins/Battles:\t\t{GlobalVariables.Wins} ({GlobalVariables.Battles})\t({Math.Round((float)GlobalVariables.Wins / (float)GlobalVariables.Battles * 100, 2).ToString().Replace("не число", "0")}%)\n" +
