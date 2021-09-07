@@ -100,11 +100,11 @@ namespace HUDBlitz.Views
             {
                 MaxDealt = 0;
                 MaxReceived = 0;
-                //StackPanelDamage.Visibility = Visibility.Hidden;
+                StackPanelDamage.Visibility = Visibility.Hidden;
             }
             else
             {
-                //StackPanelDamage.Visibility = Visibility.Visible;
+                StackPanelDamage.Visibility = Visibility.Visible;
             }
 
             CurrentDealt = Dealt;
