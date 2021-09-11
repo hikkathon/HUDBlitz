@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,9 +62,16 @@
     </ApplicationDefinition>
     <Compile Include="Commands\WarGame\API.cs" />
     <Compile Include="Models\Noilty\BattleResponse.cs" />
+    <Compile Include="Views\AdWindowView.xaml.cs">
+      <DependentUpon>AdWindowView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NotificationWindowView.xaml.cs">
       <DependentUpon>NotificationWindowView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AdWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HUDWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

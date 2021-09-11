@@ -2,21 +2,10 @@
 using HUDBlitz.Commands.WarGame;
 using HUDBlitz.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace HUDBlitz.Views
@@ -80,26 +69,26 @@ namespace HUDBlitz.Views
         #region Damage Panel
 
         int Dealt { get { return GlobalVariables.MS.Dealt; } }
-        int Received { get { return GlobalVariables.MS.Received; } }
+        int Blocked { get { return GlobalVariables.MS.Blocked; } }
         int Strength { get { return GlobalVariables.MS.Strength; } }
         int WGID { get { return GlobalVariables.MS.WGID; } }
 
         private int _currentDealt;
-        private int _currentReceived;
+        private int _currentBlocked;
         private int _maxDealt;
-        private int _maxReceived;
+        private int _maxBlocked;
 
         public int CurrentDealt{ get { return _currentDealt; } set { _currentDealt = value; } }
-        public int CurrentReceived { get { return _currentReceived; } set { _currentReceived = value; ; } }
+        public int CurrentBlocked { get { return _currentBlocked; } set { _currentBlocked = value; ; } }
         public int MaxDealt{ get { return _maxDealt; } set { _maxDealt = value; } }
-        public int MaxReceived { get { return _maxReceived; } set { _maxReceived = value; ; } }
+        public int MaxBlocked { get { return _maxBlocked; } set { _maxBlocked = value; ; } }
 
         public void DamageShow()
         {
-            if (Strength == 0 )
+            if (Strength == 0)
             {
                 MaxDealt = 0;
-                MaxReceived = 0;
+                MaxBlocked = 0;
                 StackPanelDamage.Visibility = Visibility.Hidden;
             }
             else
@@ -108,20 +97,20 @@ namespace HUDBlitz.Views
             }
 
             CurrentDealt = Dealt;
-            CurrentReceived = Received;
+            CurrentBlocked = Blocked;
 
             if (CurrentDealt > MaxDealt)
                 MaxDealt = CurrentDealt;
 
-            if (CurrentReceived > MaxReceived)
-                MaxReceived = CurrentReceived;
+            if (CurrentBlocked > MaxBlocked)
+                MaxBlocked = CurrentBlocked;
 
 
             DealtText.Text = (MaxDealt == 0) ? " 0" : $"{MaxDealt:# ### ###}";
-            ReceivedText.Text = (MaxReceived == 0) ? " 0" : $"{MaxReceived:# ### ###}";
+            ReceivedText.Text = (MaxBlocked == 0) ? " 0" : $"{MaxBlocked:# ### ###}";
             StrengthText.Text = (Strength == 0) ? " 0" : $"{Strength:# ### ###}";
 
-            GlobalVariables.MaxReceived = MaxReceived;
+            GlobalVariables.blocked_damage = MaxBlocked;
             GlobalVariables.Strength = Strength;
         }
 

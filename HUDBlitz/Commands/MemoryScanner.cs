@@ -98,7 +98,7 @@ namespace HUDBlitz.Commands
 
             Int32 ReceivedAddress = BaseAddress + 0x0348B68C;
             Int32[] ReceivedOffset = { 0xA0, 0x0, 0x10, 0xC4, 0x64, 0x148, 0x28 };
-            Received = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(ReceivedAddress, ReceivedOffset), (uint)4), 0);
+            Blocked = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(ReceivedAddress, ReceivedOffset), (uint)4), 0);
 
             Int32 StrengthAddress = BaseAddress + 0x034A3090;
             Int32[] StrengthOffset = { 0x0, 0x8, 0x2C, 0x24, 0x174 };
@@ -126,17 +126,17 @@ namespace HUDBlitz.Commands
         }
 
         /// <summary>
-        /// Damage Received : Полученный ущерб
+        /// Damage Received : Заблокированный ущерб
         /// </summary>
-        public int Received
+        public int Blocked
         {
             get
             {
-                return _received;
+                return _blocked;
             }
             set
             {
-                _received = value;
+                _blocked = value;
                 _del?.Invoke();
             }
         }
@@ -174,7 +174,7 @@ namespace HUDBlitz.Commands
         }
 
         private int _dealt;
-        private int _received;
+        private int _blocked;
         private int _strength;
         private int _wgid;
 

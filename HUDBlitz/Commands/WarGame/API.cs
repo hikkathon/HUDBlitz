@@ -120,7 +120,7 @@ namespace HUDBlitz.Commands.WarGame
                     string _fraction_id = GlobalVariables.response_Noilty.data.account.fraction_id.ToString();
                     string _wg_region = GlobalVariables.response_Noilty.data.user.wg_region;
                     string _battle_type_id = ((int)GlobalVariables.battleType).ToString();
-                    string _damage_blocked = GlobalVariables.MaxReceived.ToString();
+                    string _damage_blocked = GlobalVariables.blocked_damage.ToString();
                     string _current_durability_tank = GlobalVariables.Strength.ToString();
                     string _capture_points = (GlobalVariables.Response_WG.data.account.statistics.rating.battles - GlobalVariables.Response_WG_Send.data.account.statistics.rating.battles).ToString();
                     string _damage_dealt = (GlobalVariables.Response_WG.data.account.statistics.rating.damage_dealt - GlobalVariables.Response_WG_Send.data.account.statistics.rating.damage_dealt).ToString();
@@ -158,7 +158,7 @@ namespace HUDBlitz.Commands.WarGame
                     string _fraction_id = GlobalVariables.response_Noilty.data.account.fraction_id.ToString();
                     string _wg_region = GlobalVariables.response_Noilty.data.user.wg_region;
                     string _battle_type_id = ((int)GlobalVariables.battleType).ToString();
-                    string _damage_blocked = GlobalVariables.MaxReceived.ToString();
+                    string _damage_blocked = GlobalVariables.blocked_damage.ToString();
                     string _current_durability_tank = GlobalVariables.Strength.ToString();
                     string _capture_points = (GlobalVariables.Response_WG.data.account.statistics.all.battles - GlobalVariables.Response_WG_Send.data.account.statistics.all.battles).ToString();
                     string _damage_dealt = (GlobalVariables.Response_WG.data.account.statistics.all.damage_dealt - GlobalVariables.Response_WG_Send.data.account.statistics.all.damage_dealt).ToString();
@@ -312,7 +312,7 @@ namespace HUDBlitz.Commands.WarGame
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri($"http://www.blitzbury.noilty.com");
+                client.BaseAddress = new Uri($"{GlobalVariables.urlBbury}");
 
                 GlobalVariables.battleResponse = new Models.Noilty.BattleResponse
                 {

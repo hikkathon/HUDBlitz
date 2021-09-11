@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HUDBlitz.Views"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
         Title="HUD for Blitz - Вход" Height="250" Width="400">
 
@@ -34,7 +35,7 @@
         </StackPanel>
 
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <Label FontSize="10" Content="Ver 1.0.0 Build 1"/>
+            <Label FontSize="10" Content="Ver 1.0.1 Build 2"/>
         </StackPanel>
         <Label x:Name="LabelNotify" Margin="0 0 0 60" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
     </Grid>

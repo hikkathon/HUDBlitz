@@ -93,7 +93,7 @@ namespace HUDBlitz.Views
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri($"http://www.blitzbury.noilty.com");
+                client.BaseAddress = new Uri($"{GlobalVariables.urlBbury}");
 
                 var content = new FormUrlEncodedContent(new[]
                 {
@@ -123,7 +123,7 @@ namespace HUDBlitz.Views
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri($"http://www.blitzbury.noilty.com");
+                client.BaseAddress = new Uri($"{GlobalVariables.urlBbury}");
 
                 var content = new FormUrlEncodedContent(new[]
                 {
@@ -152,6 +152,22 @@ namespace HUDBlitz.Views
             else
             {
                 LabelNotify.Content = "error";
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //AdWindowView ad = new AdWindowView();
+            //ad.Show();
+
+            MessageBoxResult boxResult = MessageBox.Show("Я не продаю моды. Все материалы на моих ресурсах доступны всем желающим и абсолютно бесплатно и что бы это было и впредь ты можешь посмотреть рекламу в моих играх и тем самым поддержать меня)", "Поддержать проект", MessageBoxButton.YesNo);
+            if(MessageBoxResult.Yes == boxResult)
+            {
+                //System.Diagnostics.Process.Start("https://yandex.ru/games/play/171298/");
+            }
+            else
+            {
+                Close();
             }
         }
     }

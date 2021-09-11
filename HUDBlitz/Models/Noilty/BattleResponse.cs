@@ -46,5 +46,6 @@ namespace HUDBlitz.Models.Noilty
         public string free_xp { get; set; }
         public string battle_life_time { get; set; }
         public string is_premium { get; set; }
+        public string level_experience_id { get; set; }
     }
 }

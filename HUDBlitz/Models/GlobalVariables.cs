@@ -7,6 +7,7 @@ namespace HUDBlitz.Models
 {
     public static class GlobalVariables
     {
+        public static string urlBbury = "http://blitzbury.noilty.loc";
         /// <summary>
         /// Player : Информаци о игроке, обновляется каждый тик таймера
         /// </summary>
@@ -26,7 +27,7 @@ namespace HUDBlitz.Models
         public static Noilty.BattleResponse battleResponse;
         public static string password;
 
-        public static int MaxReceived;
+        public static int blocked_damage;
         public static int Strength;
 
         // Переменные Сканера памяти
@@ -40,7 +41,7 @@ namespace HUDBlitz.Models
         public static BattleType battleType;
         public static bool check = true;
 
-        #region "Рандомные бои"
+        #region "Бои"
         public static float WinRate;
         public static int Wins;
         public static int Battles;
