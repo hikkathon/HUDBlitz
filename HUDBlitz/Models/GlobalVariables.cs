@@ -7,7 +7,7 @@ namespace HUDBlitz.Models
 {
     public static class GlobalVariables
     {
-        public static string urlBbury = "http://blitzbury.noilty.loc";
+        public static string urlBbury = "http://www.blitzbury.noilty.com";
         /// <summary>
         /// Player : Информаци о игроке, обновляется каждый тик таймера
         /// </summary>
