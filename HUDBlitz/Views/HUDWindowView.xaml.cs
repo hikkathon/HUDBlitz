@@ -90,24 +90,26 @@ namespace HUDBlitz.Views
                 MaxDealt = 0;
                 MaxBlocked = 0;
                 StackPanelDamage.Visibility = Visibility.Hidden;
+                GridDamagePanel.Visibility = Visibility.Hidden;
             }
             else
             {
                 StackPanelDamage.Visibility = Visibility.Visible;
+                GridDamagePanel.Visibility = Visibility.Visible;
             }
 
             CurrentDealt = Dealt;
             CurrentBlocked = Blocked;
 
-            if (CurrentDealt > MaxDealt)
-                MaxDealt = CurrentDealt;
+            //if (CurrentDealt > MaxDealt)
+            //    MaxDealt = CurrentDealt;
 
-            if (CurrentBlocked > MaxBlocked)
-                MaxBlocked = CurrentBlocked;
+            //if (CurrentBlocked > MaxBlocked)
+            //    MaxBlocked = CurrentBlocked;
 
 
-            DealtText.Text = (MaxDealt == 0) ? " 0" : $"{MaxDealt:# ### ###}";
-            ReceivedText.Text = (MaxBlocked == 0) ? " 0" : $"{MaxBlocked:# ### ###}";
+            DealtText.Text = (CurrentDealt == 0) ? " 0" : $"{CurrentDealt:# ### ###}";
+            ReceivedText.Text = (CurrentBlocked == 0) ? " 0" : $"{CurrentBlocked:# ### ###}";
             StrengthText.Text = (Strength == 0) ? " 0" : $"{Strength:# ### ###}";
 
             GlobalVariables.blocked_damage = MaxBlocked;

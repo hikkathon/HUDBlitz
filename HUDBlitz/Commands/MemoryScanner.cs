@@ -92,15 +92,15 @@ namespace HUDBlitz.Commands
 
         public void GetDamage(object sender, EventArgs e)
         {
-            Int32 DealtAddress = BaseAddress + 0x0348B68C;
-            Int32[] DealtOffset = { 0xA0, 0x0, 0x10, 0xC4, 0x64, 0x148, 0x24 };
+            Int32 DealtAddress = BaseAddress + 0x0350D7C0;
+            Int32[] DealtOffset = { 0x3C, 0x98, 0x70, 0x24, 0x1C };
             Dealt = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(DealtAddress, DealtOffset), (uint)4), 0);
 
-            Int32 ReceivedAddress = BaseAddress + 0x0348B68C;
-            Int32[] ReceivedOffset = { 0xA0, 0x0, 0x10, 0xC4, 0x64, 0x148, 0x28 };
+            Int32 ReceivedAddress = BaseAddress + 0x0350D7C0;
+            Int32[] ReceivedOffset = { 0x3C, 0x98, 0x70, 0x28, 0x1C };
             Blocked = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(ReceivedAddress, ReceivedOffset), (uint)4), 0);
 
-            Int32 StrengthAddress = BaseAddress + 0x034A3090;
+            Int32 StrengthAddress = BaseAddress + 0x035A6C58;
             Int32[] StrengthOffset = { 0x0, 0x8, 0x2C, 0x24, 0x174 };
             Strength = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(StrengthAddress, StrengthOffset), (uint)4), 0);
 
