@@ -89,7 +89,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\MemoryScanner.cs" />
-    <Compile Include="Models\GlobalVariables.cs" />
+    <Compile Include="Models\Global.cs" />
     <Compile Include="Models\Noilty\Response.cs" />
     <Compile Include="Models\Player\Personal data\Account.cs" />
     <Compile Include="Models\Player\Personal data\Data.cs" />

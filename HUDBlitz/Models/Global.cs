@@ -5,7 +5,7 @@ using static HUDBlitz.Commands.WarGame.API;
 
 namespace HUDBlitz.Models
 {
-    public static class GlobalVariables
+    public static class Global
     {
         public static string urlBbury = "http://www.blitzbury.noilty.com";
         /// <summary>

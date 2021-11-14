@@ -21,17 +21,17 @@ namespace HUDBlitz.Views
             this.ShowInTaskbar = false;
             this.DataContext = this;
 
-            GlobalVariables.MS.GetProcessByName();
+            Global.MS.GetProcessByName();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            GlobalVariables.MS.RegisterHandler(new MemoryScanner.MemoryEditorStateHandler(DamageShow));
+            Global.MS.RegisterHandler(new MemoryScanner.MemoryEditorStateHandler(DamageShow));
 
 
             DispatcherTimer dt = new DispatcherTimer();
             dt.Interval = TimeSpan.FromMilliseconds(1);
-            dt.Tick += GlobalVariables.MS.GetDamage;
+            dt.Tick += Global.MS.GetDamage;
             dt.Tick += WindowSize;
             dt.Start();
 
@@ -50,28 +50,28 @@ namespace HUDBlitz.Views
         private async void AccountInfo(object sender, EventArgs e)
         {
             count++;
-            await API.GetAccountInfo("d2bfb95adbc6f34fb32c4924b4c93fa4", GlobalVariables.response_Noilty.data.user.wg_account_id.ToString(), GlobalVariables.response_Noilty.data.user.wg_access_token, GlobalVariables.response_Noilty.data.user.wg_region);  
+            await API.GetAccountInfo("d2bfb95adbc6f34fb32c4924b4c93fa4", Global.response_Noilty.data.user.wg_account_id.ToString(), Global.response_Noilty.data.user.wg_access_token, Global.response_Noilty.data.user.wg_region);  
             BattleStatsLabel.Content = 
-                $"Mode:\t\t\t{GlobalVariables.battleType}\n" +
-                $"Nickname:\t\t{GlobalVariables.Response_WG.data.account.nickname}\n" +
-                $"Wins/Battles:\t\t{GlobalVariables.Wins} ({GlobalVariables.Battles})\t({Math.Round((float)GlobalVariables.Wins / (float)GlobalVariables.Battles * 100, 2).ToString().Replace("не число", "0")}%)\n" +
-                $"Kills:\t\t\t{GlobalVariables.Frags}\t({Math.Round((float)GlobalVariables.Frags / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
-                $"Deaths:\t\t\t{GlobalVariables.Deaths}\t({Math.Round((float)GlobalVariables.Deaths / (float)GlobalVariables.Battles * 100, 2).ToString().Replace("не число", "0")}%)\n" +
-                $"Hits/Shots:\t\t{GlobalVariables.Hits}/{GlobalVariables.Shots}\t({Math.Round((float)GlobalVariables.Hits / (float)GlobalVariables.Shots * 100, 2).ToString().Replace("не число", "0")}%)\n" +
-                $"Damage Dealt:\t\t{GlobalVariables.Damage_dealt}\t({Math.Round((float)GlobalVariables.Damage_dealt / (float)GlobalVariables.Battles, 0).ToString().Replace("не число", "0")})\n" +
-                $"Damage Received:\t{GlobalVariables.Damage_received}\t({Math.Round((float)GlobalVariables.Damage_received / (float)GlobalVariables.Battles, 0).ToString().Replace("не число", "0")})\n" +
-                $"Spotted:\t\t\t{GlobalVariables.Spotted}\t({Math.Round((float)GlobalVariables.Spotted / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
-                $"Defence:\t\t\t{GlobalVariables.Dropped_capture_points}\t({Math.Round((float)GlobalVariables.Dropped_capture_points / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n" +
-                $"Capture:\t\t\t{GlobalVariables.Capture_points}\t({Math.Round((float)GlobalVariables.Capture_points / (float)GlobalVariables.Battles, 2).ToString().Replace("не число", "0")})\n\n" +
-                $"Count: {count}, Send : {GlobalVariables.IsSendNoilty}" ;
+                $"Mode:\t\t\t{Global.battleType}\n" +
+                $"Nickname:\t\t{Global.Response_WG.data.account.nickname}\n" +
+                $"Wins/Battles:\t\t{Global.Wins} ({Global.Battles})\t({Math.Round((float)Global.Wins / (float)Global.Battles * 100, 2).ToString().Replace("не число", "0")}%)\n" +
+                $"Kills:\t\t\t{Global.Frags}\t({Math.Round((float)Global.Frags / (float)Global.Battles, 2).ToString().Replace("не число", "0")})\n" +
+                $"Deaths:\t\t\t{Global.Deaths}\t({Math.Round((float)Global.Deaths / (float)Global.Battles * 100, 2).ToString().Replace("не число", "0")}%)\n" +
+                $"Hits/Shots:\t\t{Global.Hits}/{Global.Shots}\t({Math.Round((float)Global.Hits / (float)Global.Shots * 100, 2).ToString().Replace("не число", "0")}%)\n" +
+                $"Damage Dealt:\t\t{Global.Damage_dealt}\t({Math.Round((float)Global.Damage_dealt / (float)Global.Battles, 0).ToString().Replace("не число", "0")})\n" +
+                $"Damage Received:\t{Global.Damage_received}\t({Math.Round((float)Global.Damage_received / (float)Global.Battles, 0).ToString().Replace("не число", "0")})\n" +
+                $"Spotted:\t\t\t{Global.Spotted}\t({Math.Round((float)Global.Spotted / (float)Global.Battles, 2).ToString().Replace("не число", "0")})\n" +
+                $"Defence:\t\t\t{Global.Dropped_capture_points}\t({Math.Round((float)Global.Dropped_capture_points / (float)Global.Battles, 2).ToString().Replace("не число", "0")})\n" +
+                $"Capture:\t\t\t{Global.Capture_points}\t({Math.Round((float)Global.Capture_points / (float)Global.Battles, 2).ToString().Replace("не число", "0")})\n\n" +
+                $"Count: {count}, Send : {Global.IsSendNoilty}" ;
         }
 
         #region Damage Panel
 
-        int Dealt { get { return GlobalVariables.MS.Dealt; } }
-        int Blocked { get { return GlobalVariables.MS.Blocked; } }
-        int Strength { get { return GlobalVariables.MS.Strength; } }
-        int WGID { get { return GlobalVariables.MS.WGID; } }
+        int Dealt { get { return Global.MS.Dealt; } }
+        int Blocked { get { return Global.MS.Blocked; } }
+        int Strength { get { return Global.MS.Strength; } }
+        int WGID { get { return Global.MS.WGID; } }
 
         private int _currentDealt;
         private int _currentBlocked;
@@ -89,31 +89,31 @@ namespace HUDBlitz.Views
             {
                 MaxDealt = 0;
                 MaxBlocked = 0;
-                StackPanelDamage.Visibility = Visibility.Hidden;
-                GridDamagePanel.Visibility = Visibility.Hidden;
+                //StackPanelDamage.Visibility = Visibility.Hidden;
+                //GridStats.Visibility = Visibility.Hidden;
             }
             else
             {
-                StackPanelDamage.Visibility = Visibility.Visible;
-                GridDamagePanel.Visibility = Visibility.Visible;
+            //    StackPanelDamage.Visibility = Visibility.Visible;
+            //    GridStats.Visibility = Visibility.Visible;
             }
 
             CurrentDealt = Dealt;
             CurrentBlocked = Blocked;
 
-            //if (CurrentDealt > MaxDealt)
-            //    MaxDealt = CurrentDealt;
+            if (CurrentDealt > MaxDealt)
+                MaxDealt = CurrentDealt;
 
-            //if (CurrentBlocked > MaxBlocked)
-            //    MaxBlocked = CurrentBlocked;
+            if (CurrentBlocked > MaxBlocked)
+                MaxBlocked = CurrentBlocked;
 
 
-            DealtText.Text = (CurrentDealt == 0) ? " 0" : $"{CurrentDealt:# ### ###}";
-            ReceivedText.Text = (CurrentBlocked == 0) ? " 0" : $"{CurrentBlocked:# ### ###}";
+            DealtText.Text = (CurrentDealt == 0) ? " 0" : $"{MaxDealt:# ### ###}";
+            ReceivedText.Text = (CurrentBlocked == 0) ? " 0" : $"{MaxBlocked:# ### ###}";
             StrengthText.Text = (Strength == 0) ? " 0" : $"{Strength:# ### ###}";
 
-            GlobalVariables.blocked_damage = MaxBlocked;
-            GlobalVariables.Strength = Strength;
+            Global.blocked_damage = MaxBlocked;
+            Global.Strength = Strength;
         }
 
         #endregion
@@ -135,7 +135,7 @@ namespace HUDBlitz.Views
 
         public void WindowSize(object sender, EventArgs e)
         {
-            if (GlobalVariables.IsEnabledGame)
+            if (Global.IsEnabledGame)
             {
                 using (Process process = Process.GetProcessesByName("wotblitz")[0])
                 {

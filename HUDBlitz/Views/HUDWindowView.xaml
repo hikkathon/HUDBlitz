@@ -36,7 +36,7 @@
         </Grid.RowDefinitions>
 
         <!-- Контейнер для плашки хп/нанесенного/заблокированного урона -->
-        <Grid Visibility="Hidden" x:Name="GridDamagePanel" Grid.Row="1">
+        <Grid Visibility="Visible" x:Name="GridDamagePanel" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -62,7 +62,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="GridStats" Grid.Row="2" VerticalAlignment="Bottom">
+        <Grid Visibility="Visible" x:Name="GridStats" Grid.Row="2" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="245"/>
                 <ColumnDefinition Width="*"/>

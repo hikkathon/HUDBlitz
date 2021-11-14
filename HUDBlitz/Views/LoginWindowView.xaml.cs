@@ -33,7 +33,7 @@ namespace HUDBlitz.Views
 
         private async void btnEnterToken_Click(object sender, RoutedEventArgs e)
         {
-            if (GlobalVariables.response_Noilty != null && !GlobalVariables.response_Noilty.status.Contains("error"))
+            if (Global.response_Noilty != null && !Global.response_Noilty.status.Contains("error"))
             {
                 TokenPanelHidden();
             }
@@ -45,27 +45,27 @@ namespace HUDBlitz.Views
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            GlobalVariables.MS = new MemoryScanner("wotblitz.exe");
+            Global.MS = new MemoryScanner("wotblitz.exe");
 
             try
             {
-                GlobalVariables.MS.GetBaseAddress();
-                GlobalVariables.IsEnabledGame = true;
+                Global.MS.GetBaseAddress();
+                Global.IsEnabledGame = true;
             }
             catch (Exception exc)
             {
                 MessageBox.Show($"World of Tanks Blitz не запущен, запустите игру и повторите попытку.", $"Ошибка : {exc.Message}", MessageBoxButton.OK, MessageBoxImage.Error);
-                GlobalVariables.IsEnabledGame = false;
+                Global.IsEnabledGame = false;
             }
 
-            if (GlobalVariables.response_Noilty != null && !GlobalVariables.IsHashValid.Contains("error") && GlobalVariables.IsEnabledGame)
+            if (Global.response_Noilty != null && !Global.IsHashValid.Contains("error") && Global.IsEnabledGame)
             {
                 PasswordPanelHidden();
             }
             else
             {
-                GlobalVariables.password = UserPassword.Password;
-                await AuthPassword(UserPassword.Password, GlobalVariables.response_Noilty.data.account.password);
+                Global.password = UserPassword.Password;
+                await AuthPassword(UserPassword.Password, Global.response_Noilty.data.account.password);
             }
         }
 
@@ -93,7 +93,7 @@ namespace HUDBlitz.Views
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri($"{GlobalVariables.urlBbury}");
+                client.BaseAddress = new Uri($"{Global.urlBbury}");
 
                 var content = new FormUrlEncodedContent(new[]
                 {
@@ -103,19 +103,19 @@ namespace HUDBlitz.Views
                 var response = await client.PostAsync("/api/get-data/from/db-user", content);
                 string json = await response.Content.ReadAsStringAsync();
 
-                GlobalVariables.response_Noilty = JsonConvert.DeserializeObject<Models.Noilty.Response>(json);
+                Global.response_Noilty = JsonConvert.DeserializeObject<Models.Noilty.Response>(json);
             }
 
             // Если токен валидный пропускаем пользователя дальше
-            if (GlobalVariables.response_Noilty.status.Contains("success"))
+            if (Global.response_Noilty.status.Contains("success"))
             {
                 UserKey.IsEnabled = false;
                 btnEnterToken.Content = $"Далее";
-                LabelNotify.Content = GlobalVariables.response_Noilty.status;
+                LabelNotify.Content = Global.response_Noilty.status;
             }
             else
             {
-                LabelNotify.Content = GlobalVariables.response_Noilty.status;
+                LabelNotify.Content = Global.response_Noilty.status;
             }
         }
 
@@ -123,7 +123,7 @@ namespace HUDBlitz.Views
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri($"{GlobalVariables.urlBbury}");
+                client.BaseAddress = new Uri($"{Global.urlBbury}");
 
                 var content = new FormUrlEncodedContent(new[]
                 {
@@ -132,10 +132,10 @@ namespace HUDBlitz.Views
                 });
 
                 var response = await client.PostAsync("/api/check/hash/password", content);
-                GlobalVariables.IsHashValid = await response.Content.ReadAsStringAsync();
+                Global.IsHashValid = await response.Content.ReadAsStringAsync();
             }
 
-            if (GlobalVariables.IsHashValid.Contains("success"))
+            if (Global.IsHashValid.Contains("success"))
             {
                 LabelNotify.Content = "success";
                 UserPassword.IsEnabled = false;
